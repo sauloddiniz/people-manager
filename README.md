@@ -8,6 +8,7 @@ Antes de começar, certifique-se de ter os seguintes requisitos instalados no se
 
 - Java 17: Certifique-se de ter o JDK (Java Development Kit) 17 ou uma versão superior instalada no seu sistema.
 - Maven: O projeto requer o Apache Maven para gerenciamento de dependências e compilação. Certifique-se de ter o Maven instalado no seu sistema.
+- Banco de dados H2: O projeto utiliza o banco de dados em memória H2. O banco de dados iniciará automaticamente quando a aplicação for iniciada e será destruído quando a aplicação for encerrada.
 
 ### <a name="executar-api"></a>Executar
 ### <a name="ambiente-local"></a>ambiente local

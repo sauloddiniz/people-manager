@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,4 +23,6 @@ public class Person {
     private String fullName;
     @Column(name = "BIRTH_DATE")
     private LocalDate birthDate;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Address> addresses;
 }

@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class PersonRequestDto {
+public class PersonDto {
     @NotEmpty
     private String fullName;
     @NotEmpty

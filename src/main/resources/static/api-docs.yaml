@@ -15,7 +15,7 @@ tags:
   - name: person
     description: description by person
   - name: address
-    description: address person
+    description: address by person
 paths:
   /person:
     post:
@@ -29,7 +29,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PersonRequestDto'
+              $ref: '#/components/schemas/PersonDto'
         required: true
       responses:
         '201':
@@ -70,10 +70,10 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PersonResponseDto'
+                  $ref: '#/components/schemas/PersonDto'
         '500':
           description: Internal server error
-  /person/{id}:
+  /person/{personId}:
     put:
       tags:
         - person
@@ -82,7 +82,7 @@ paths:
       operationId: updatePerson
       parameters:
         - in: path
-          name: id
+          name: personId
           required: true
           schema:
             type: string
@@ -92,7 +92,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PersonRequestDto'
+              $ref: '#/components/schemas/PersonDto'
         required: true
       responses:
         '200':
@@ -100,14 +100,186 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonRequestDto'
-        '204':
+                $ref: '#/components/schemas/PersonDto'
+        '404':
           description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+  /person/{personId}/adrresses:
+    post:
+      tags:
+        - address
+      summary: Add a new address
+      description: Add a new address
+      operationId: addAdrress
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            type: string
+          description: The ID of the person to be save address
+      requestBody:
+        description: Create a address
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressDto'
+        required: true
+      responses:
+        '201':
+          description: created
+          headers:
+            Location:
+              description: URI location created by person
+              schema:
+                type: string
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+    get:
+      tags:
+        - address
+      summary: Get addresses
+      description: Get a addresses
+      operationId: getAdrress
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            type: string
+          description: The ID of the person to be save address
+        - name: ids
+          in: query
+          description: List of ids to filter the address
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddressDto'
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+  /person/{personId}/adrresses/{addressId}:
+    put:
+      tags:
+        - address
+      summary: update address
+      description: update address
+      operationId: updateAdrress
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            type: string
+          description: The ID of the person to be save address
+        - in: path
+          name: addressId
+          required: true
+          schema:
+            type: string
+          description: The ID of the address to update
+      requestBody:
+        description: update address
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressDto'
+        required: true
+      responses:
+        '200':
+          description: updated
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+  /person/{personId}/adrresses/{addressId}/principal:
+    patch:
+      tags:
+        - address
+      summary: update principal address
+      description: update principal address
+      operationId: updatePrincipalAdrress
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            type: string
+          description: The ID of the person to be save address
+        - in: path
+          name: addressId
+          required: true
+          schema:
+            type: string
+          description: The ID of the address to update
+      responses:
+        '200':
+          description: updated
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal server error
 components:
   schemas:
-    PersonRequestDto:
+    PersonDto:
       type: object
       required:
         - fullName
@@ -118,21 +290,20 @@ components:
         birthDate:
           type: string
           format: date
-    PersonResponseDto:
+    AddressDto:
       type: object
+      required:
+        - state
+        - street
+        - zipCode
+        - city
+        - state
+        - number
+        - principal
       properties:
-        fullName:
+        id:
           type: string
-        birthDate:
-          type: string
-          format: date
-    Address:
-      type: object
-      properties:
-        addressId:
-          type: integer
-          format: int64
-          example: 1
+          example: identity address
         street:
           type: string
           example: Duque de Caxias
@@ -142,12 +313,15 @@ components:
         state:
           type: string
           example: MG
-        CEP:
+        zipCode:
           type: string
           example: '35170-009'
-        isPrincipal:
+        principal:
           type: boolean
-          example: true
+          example: false
+        number:
+          type: string
+          example: '264'
     ErrorResponse:
       type: object
       properties:
@@ -155,7 +329,7 @@ components:
           type: string
           format: Wed May 08 00:00:00 BRT 2024
         status:
-          type: int
+          type: integer
           example: 400
         path:
           type: string

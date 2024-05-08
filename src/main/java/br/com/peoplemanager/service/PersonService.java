@@ -1,7 +1,6 @@
 package br.com.peoplemanager.service;
 
-import br.com.peoplemanager.dto.person.PersonRequestDto;
-import br.com.peoplemanager.dto.person.PersonResponseDto;
+import br.com.peoplemanager.dto.person.PersonDto;
 import br.com.peoplemanager.entity.Person;
 import br.com.peoplemanager.exception.PersonNotFoundException;
 import br.com.peoplemanager.repository.PersonRepository;
@@ -23,31 +22,33 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    ;
-
-    public Long savePerson(final PersonRequestDto personRequestDto) {
+    public Long savePerson(final PersonDto personRequestDto) {
         final Person saved =
-                personRepository.save(PersonConverter.personRequestDtoToPerson(personRequestDto));
+                personRepository.save(PersonConverter.personDtoToPerson(personRequestDto));
         return saved.getPersonId();
     }
 
-    public void updatePerson(PersonRequestDto personRequestDto, Long personId) {
-        Person person = personRepository.findById(personId)
-                .orElseThrow(() -> new PersonNotFoundException("Person not found: " + personId));
+    public void updatePerson(PersonDto personRequestDto, Long personId) {
+        Person person = validPerson(personId);
         person.setFullName(personRequestDto.getFullName());
         person.setBirthDate(DateConverter.converterStringToLocalDate(personRequestDto.getBirthDate()));
         personRepository.save(person);
     }
 
-    public List<PersonResponseDto> listPerson(String names) {
-        if (isDefaultValue(names)) {
-            return PersonConverter.personsToPersonsResponseDto(personRepository.findAll());
-        }
-        return PersonConverter.personsToPersonsResponseDto(personRepository
-                .findAll(where(containsHasName(verifyAsListValuePerson(names)))));
+    public Person validPerson(Long personId) {
+        return personRepository.findById(personId)
+                .orElseThrow(() -> new PersonNotFoundException("Person not found: " + personId));
     }
 
-    private List<String> verifyAsListValuePerson(String persons) {
+    public List<PersonDto> listPerson(String names) {
+        if (isDefaultValue(names)) {
+            return PersonConverter.personsToPersonsDto(personRepository.findAll());
+        }
+        return PersonConverter.personsToPersonsDto(personRepository
+                .findAll(where(containsHasName(verifyAsListValue(names)))));
+    }
+
+    private List<String> verifyAsListValue(String persons) {
         if (persons.contains(",")) {
             return Arrays.asList(persons.split(","));
         } else if (isContainOneValue(persons)) {
@@ -61,7 +62,7 @@ public class PersonService {
     }
 
     private static boolean isDefaultValue(String names) {
-        return names != null && names.equals("");
+        return names != null && names.isEmpty();
     }
 
 }

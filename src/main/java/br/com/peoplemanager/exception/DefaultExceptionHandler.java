@@ -18,7 +18,7 @@ import java.util.List;
 public class DefaultExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PersonErrorException.class)
-    public ResponseEntity<ErrorResponseDto> clientApiFeingException(PersonErrorException exception, HttpServletRequest request){
+    public ResponseEntity<ErrorResponseDto> personError(PersonErrorException exception, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorResponseDto
                         .builder()
@@ -30,7 +30,19 @@ public class DefaultExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(PersonNotFoundException.class)
-    public ResponseEntity<ErrorResponseDto> zeroResultsAddressException(PersonNotFoundException exception, HttpServletRequest request){
+    public ResponseEntity<ErrorResponseDto> personNotFoundException(PersonNotFoundException exception, HttpServletRequest request){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ErrorResponseDto
+                        .builder()
+                        .message(exception.getMessage())
+                        .status(HttpStatus.NOT_FOUND.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
+
+    @ExceptionHandler(AddressNotFoundException.class)
+    public ResponseEntity<ErrorResponseDto> addressNotFoundException(AddressNotFoundException exception, HttpServletRequest request){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ErrorResponseDto
                         .builder()
