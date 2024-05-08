@@ -50,7 +50,7 @@ paths:
     get:
       tags:
         - person
-      summary: List person
+      summary: Get person
       description: list all person
       operationId: listPerson
       parameters:
@@ -77,7 +77,7 @@ paths:
     put:
       tags:
         - person
-      summary: Update an existing person
+      summary: Update person
       description: Update an existing person by Id
       operationId: updatePerson
       parameters:
@@ -122,7 +122,7 @@ paths:
           required: true
           schema:
             type: string
-          description: The ID of the person to be save address
+          description: The ID of the person
       requestBody:
         description: Create a address
         content:
@@ -164,7 +164,7 @@ paths:
           required: true
           schema:
             type: string
-          description: The ID of the person to be save address
+          description: The ID of the person
         - name: ids
           in: query
           description: List of ids to filter the address
@@ -209,13 +209,13 @@ paths:
           required: true
           schema:
             type: string
-          description: The ID of the person to be save address
+          description: The ID of the person
         - in: path
           name: addressId
           required: true
           schema:
             type: string
-          description: The ID of the address to update
+          description: The ID of the address
       requestBody:
         description: update address
         content:
@@ -225,7 +225,7 @@ paths:
         required: true
       responses:
         '200':
-          description: updated
+          description: success
         '400':
           description: bad request
           content:
@@ -253,16 +253,16 @@ paths:
           required: true
           schema:
             type: string
-          description: The ID of the person to be save address
+          description: The ID of the person
         - in: path
           name: addressId
           required: true
           schema:
             type: string
-          description: The ID of the address to update
+          description: The ID of the address
       responses:
         '200':
-          description: updated
+          description: success
         '400':
           description: bad request
           content:
@@ -301,9 +301,6 @@ components:
         - number
         - principal
       properties:
-        id:
-          type: string
-          example: identity address
         street:
           type: string
           example: Duque de Caxias

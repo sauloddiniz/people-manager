@@ -24,6 +24,7 @@ public class AddressService {
 
     public Long saveAddress(AddressDto addressRequest, Long personId) {
         Person person = validExistingPerson(personId);
+        validPrincipalAddress(addressRequest, personId);
         Address address = AddressConverter
                 .addressDtoToAddress(addressRequest, person);
         Address saved = addressRepository.save(address);
@@ -36,6 +37,7 @@ public class AddressService {
 
     public void updateAddress(AddressDto addressRequest, Long personId, Long addressId) {
         validExistingPerson(personId);
+        validPrincipalAddress(addressRequest, personId);
         Address address = validExistingAddress(addressId);
         setValueAddress(addressRequest, address);
         addressRepository.save(address);
@@ -49,6 +51,22 @@ public class AddressService {
             adr.setPrincipal(adr.equals(address));
             addressRepository.save(adr);
         });
+    }
+
+    private void validPrincipalAddress(AddressDto addressRequest, Long personId) {
+        if (addressRequest.getPrincipal()) {
+            changePrincipalAddress(personId);
+        }
+    }
+
+    private void changePrincipalAddress(Long personId) {
+        addressRepository.findAllByPersonPersonId(personId)
+                .stream()
+                .filter(Address::getPrincipal)
+                .forEach(address -> {
+                    address.setPrincipal(false);
+                    addressRepository.save(address);
+                });
     }
 
     public List<AddressDto> getAddresses(Long personId, String ids) {
