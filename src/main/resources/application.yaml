@@ -1,0 +1,19 @@
+springdoc:
+  api-docs:
+    path: /api-docs.yaml
+    enabled: 'false'
+
+spring:
+  datasource:
+    username: sa
+    url: jdbc:h2:mem:peopledb
+    driverClassName: org.h2.Driver
+    password: password
+  application:
+    name: people-manager
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+
+server:
+  servlet:
+    context-path: /api
