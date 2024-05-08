@@ -6,14 +6,20 @@ springdoc:
 spring:
   datasource:
     username: sa
-    url: jdbc:h2:mem:peopledb
+    url: jdbc:h2:file:/data/peopledb
     driverClassName: org.h2.Driver
     password: password
   application:
     name: people-manager
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
 
 server:
   servlet:
     context-path: /api
+

@@ -18,32 +18,6 @@ tags:
     description: address person
 paths:
   /person:
-    put:
-      tags:
-        - person
-      summary: Update an existing person
-      description: Update an existing person by Id
-      operationId: updatePerson
-      requestBody:
-        description: Update an existent person
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Person'
-        required: true
-      responses:
-        '200':
-          description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Person'
-        '400':
-          description: Invalid ID supplied
-        '404':
-          description: Person not found
-        '422':
-          description: Validation exception
     post:
       tags:
         - person
@@ -55,7 +29,70 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Person'
+              $ref: '#/components/schemas/PersonRequestDto'
+        required: true
+      responses:
+        '201':
+          description: created
+          headers:
+            Location:
+              description: URI location created by person
+              schema:
+                type: string
+        '400':
+          description: bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+    get:
+      tags:
+        - person
+      summary: List person
+      description: list all person
+      operationId: listPerson
+      parameters:
+        - name: names
+          in: query
+          description: List of names to filter the persons
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonResponseDto'
+        '500':
+          description: Internal server error
+  /person/{id}:
+    put:
+      tags:
+        - person
+      summary: Update an existing person
+      description: Update an existing person by Id
+      operationId: updatePerson
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: The ID of the person to be updated
+      requestBody:
+        description: Update an existent person
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonRequestDto'
         required: true
       responses:
         '200':
@@ -63,30 +100,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Person'
-        '400':
-          description: Invalid input
-        '422':
-          description: Validation exception
-
+                $ref: '#/components/schemas/PersonRequestDto'
+        '204':
+          description: Person not found
+        '500':
+          description: Internal server error
 components:
   schemas:
-    Person:
+    PersonRequestDto:
       type: object
+      required:
+        - fullName
+        - birthDate
       properties:
-        id:
-          type: integer
-          format: int64
-          example: 10
-        personId:
-          type: integer
-          format: int64
-          example: 1
         fullName:
           type: string
         birthDate:
           type: string
-          format: date-time
+          format: date
+    PersonResponseDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+        birthDate:
+          type: string
+          format: date
     Address:
       type: object
       properties:
@@ -109,3 +148,21 @@ components:
         isPrincipal:
           type: boolean
           example: true
+    ErrorResponse:
+      type: object
+      properties:
+        date:
+          type: string
+          format: Wed May 08 00:00:00 BRT 2024
+        status:
+          type: int
+          example: 400
+        path:
+          type: string
+          example: /person
+        message:
+          type: string
+          example: Error field
+        method:
+          type: string
+          example: POST
