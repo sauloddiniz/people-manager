@@ -1,10 +1,7 @@
 package br.com.peoplemanager.controller;
 
 import br.com.peoplemanager.entity.Address;
-import br.com.peoplemanager.entity.Person;
 import br.com.peoplemanager.repository.AddressRepository;
-import br.com.peoplemanager.repository.PersonRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,7 +14,6 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.time.LocalDate;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
