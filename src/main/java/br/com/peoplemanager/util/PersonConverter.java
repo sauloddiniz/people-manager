@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class PersonConverter {
 
+    private PersonConverter(){};
     public static Person personDtoToPerson(PersonDto personRequestDto) {
         return Person.builder()
                 .fullName(personRequestDto.getFullName())

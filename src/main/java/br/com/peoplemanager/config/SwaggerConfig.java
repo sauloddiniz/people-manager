@@ -29,7 +29,7 @@ public class SwaggerConfig {
     }
 
     @Bean
-    SpringDocUIConfiguration SpringDocUIConfiguration(Optional<SwaggerUiConfigProperties> optionalSwaggerUiConfigProperties){
+    SpringDocUIConfiguration SpringDocUiConfiguration(Optional<SwaggerUiConfigProperties> optionalSwaggerUiConfigProperties){
         return new SpringDocUIConfiguration(optionalSwaggerUiConfigProperties);
     }
 

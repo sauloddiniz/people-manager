@@ -10,6 +10,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class AddressConverter {
+
+    private AddressConverter(){};
     public static Address addressDtoToAddress(AddressDto addressRequest, Person person) {
         return Address.builder()
                 .street(addressRequest.getStreet())
