@@ -17,5 +17,5 @@ No diretório raiz do projeto execute o comando
 mvn spring-boot:run  
 ````
 
-### Documentacao dos contratos dos controladores
-* [Swagger](http://localhost:8080/api/swagger-ui/index.html)
+### Documentacao dos controladores
+* [Swagger-local](http://localhost:8080/api/swagger-ui/index.html)
