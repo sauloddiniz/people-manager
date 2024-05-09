@@ -41,28 +41,26 @@ public class PersonService {
     }
 
     public List<PersonDto> listPerson(String names) {
-        if (isDefaultValue(names)) {
+        if (isEmpty(names)) {
             return PersonConverter.personsToPersonsDto(personRepository.findAll());
         }
         return PersonConverter.personsToPersonsDto(personRepository
-                .findAll(where(containsHasName(verifyAsListValue(names)))));
+                .findAll(where(containsHasName(splitNamesToIndividualPersons(names)))));
     }
 
-    private List<String> verifyAsListValue(String persons) {
-        if (persons.contains(",")) {
-            return Arrays.asList(persons.split(","));
-        } else if (isContainOneValue(persons)) {
-            return List.of(persons);
+    private List<String> splitNamesToIndividualPersons(String names) {
+        if (hasMultipleNames(names)) {
+            return Arrays.asList(names.split(","));
         }
-        return new ArrayList<>();
+        return Collections.singletonList(names);
     }
 
-    private static boolean isContainOneValue(String persons) {
-        return persons != null && !persons.contains(",");
+    private static boolean isEmpty(String names) {
+        return names == null || names.isEmpty();
     }
 
-    private static boolean isDefaultValue(String names) {
-        return names != null && names.isEmpty();
+    private static boolean hasMultipleNames(String names) {
+        return names != null && names.contains(",");
     }
 
 }

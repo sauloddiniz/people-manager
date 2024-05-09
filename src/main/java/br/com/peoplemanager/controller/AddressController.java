@@ -11,7 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person/{personId}/adrresses")
+@RequestMapping("/person/{personId}/addresses")
 public class AddressController {
 
     private final AddressService addressService;

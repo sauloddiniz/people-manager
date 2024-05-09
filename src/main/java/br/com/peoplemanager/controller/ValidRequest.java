@@ -6,7 +6,7 @@ import org.springframework.validation.BindingResult;
 import java.util.Objects;
 
 public class ValidRequest {
-    private ValidRequest(){};
+    private ValidRequest(){}
     public static void valid(BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             final String field = getFirstFieldContainsError(bindingResult);

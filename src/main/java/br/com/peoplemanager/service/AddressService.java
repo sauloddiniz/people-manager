@@ -8,9 +8,9 @@ import br.com.peoplemanager.repository.AddressRepository;
 import br.com.peoplemanager.util.AddressConverter;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Service
 public class AddressService {
@@ -41,10 +41,10 @@ public class AddressService {
 
     public List<AddressDto> getAddresses(Long personId, String ids) {
         validExistingPerson(personId);
-        if (isDefaultValue(ids)) {
+        if (isEmpty(ids)) {
             return AddressConverter.addressesToAddressDto(addressRepository.findAllByPersonPersonId(personId));
         }
-        return AddressConverter.addressesToAddressDto(addressRepository.findAllByPersonPersonIdAndAddressIdIn(personId, verifyAsListValue(ids)));
+        return AddressConverter.addressesToAddressDto(addressRepository.findAllByPersonPersonIdAndAddressIdIn(personId, splitIds(ids)));
     }
 
     public void updatePrincipalAddress(Long personId, Long addressId) {
@@ -78,22 +78,20 @@ public class AddressService {
                 .orElseThrow(() -> new AddressNotFoundException("Address not found: " + addressId));
     }
 
-    private List<Long> verifyAsListValue(String ids) {
-        if (ids.contains(",")) {
+    private List<Long> splitIds(String ids) {
+        if (hasMultipleNames(ids)) {
             return Arrays.stream(ids.split(","))
                     .map(Long::valueOf).toList();
-        } else if (isContainOneValue(ids)) {
-            return List.of(Long.valueOf(ids));
         }
-        return new ArrayList<>();
+        return Stream.of(ids).map(Long::valueOf).toList();
     }
 
-    private static boolean isContainOneValue(String persons) {
-        return persons != null && !persons.contains(",");
+    private static boolean isEmpty(String names) {
+        return names == null || names.isEmpty();
     }
 
-    private static boolean isDefaultValue(String names) {
-        return names != null && names.isEmpty();
+    private static boolean hasMultipleNames(String names) {
+        return names != null && names.contains(",");
     }
 
     private static void setValueAddress(AddressDto addressRequest, Address address) {

@@ -109,13 +109,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal server error
-  /person/{personId}/adrresses:
+  /person/{personId}/addresses:
     post:
       tags:
         - address
       summary: Add a new address
       description: Add a new address
-      operationId: addAdrress
+      operationId: addAddress
       parameters:
         - in: path
           name: personId
@@ -157,7 +157,7 @@ paths:
         - address
       summary: Get addresses
       description: Get a addresses
-      operationId: getAdrress
+      operationId: getAddress
       parameters:
         - in: path
           name: personId
@@ -196,13 +196,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal server error
-  /person/{personId}/adrresses/{addressId}:
+  /person/{personId}/addresses/{addressId}:
     put:
       tags:
         - address
       summary: update address
       description: update address
-      operationId: updateAdrress
+      operationId: updateAddress
       parameters:
         - in: path
           name: personId
@@ -240,13 +240,13 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal server error
-  /person/{personId}/adrresses/{addressId}/principal:
+  /person/{personId}/addresses/{addressId}/principal:
     patch:
       tags:
         - address
       summary: update principal address
       description: update principal address
-      operationId: updatePrincipalAdrress
+      operationId: updatePrincipalAddress
       parameters:
         - in: path
           name: personId

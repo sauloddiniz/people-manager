@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class AddressConverter {
 
-    private AddressConverter(){};
+    private AddressConverter(){}
     public static Address addressDtoToAddress(AddressDto addressRequest, Person person) {
         return Address.builder()
                 .street(addressRequest.getStreet())
@@ -35,6 +35,6 @@ public class AddressConverter {
                         .street(address.getStreet())
                         .zipCode(address.getZipCode())
                         .build();
-        return addresses.stream().map(converter).collect(Collectors.toList());
+        return addresses.stream().map(converter).toList();
     }
 }

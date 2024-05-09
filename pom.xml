@@ -20,7 +20,7 @@
         <sonar.coverage.exclusions>
             **/config/**,
             **/dto/**,
-            **/exceptions/**
+            **/exception/**
         </sonar.coverage.exclusions>
     </properties>
     <dependencies>

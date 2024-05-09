@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class PersonConverter {
 
-    private PersonConverter(){};
+    private PersonConverter(){}
     public static Person personDtoToPerson(PersonDto personRequestDto) {
         return Person.builder()
                 .fullName(personRequestDto.getFullName())
@@ -23,7 +23,7 @@ public class PersonConverter {
                         .birthDate(DateConverter.converterLocalDateToString(person.getBirthDate()))
                         .fullName(person.getFullName())
                     .build();
-        return persons.stream().map(converter).collect(Collectors.toList());
+        return persons.stream().map(converter).toList();
     }
 
 }
