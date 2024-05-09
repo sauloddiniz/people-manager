@@ -5,7 +5,7 @@ springdoc:
 spring:
   datasource:
     username: sa
-    url: jdbc:h2:file:/data/peopledb
+    url: jdbc:h2:man:/data/peopledb
     driverClassName: org.h2.Driver
     password: password
   application:
