@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class ValidRequest {
     private ValidRequest(){}
-    public static void valid(BindingResult bindingResult) {
+    protected static void valid(BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             final String field = getFirstFieldContainsError(bindingResult);
             final String error = getFirstDefaultMessageError(bindingResult);
