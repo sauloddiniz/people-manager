@@ -23,16 +23,12 @@ public class AddressService {
     }
 
     public Long saveAddress(AddressDto addressRequest, Long personId) {
-        Person person = validExistingPerson(personId);
         validPrincipalAddress(addressRequest, personId);
         Address address = AddressConverter
-                .addressDtoToAddress(addressRequest, person);
+                .addressDtoToAddress(addressRequest,
+                        validExistingPerson(personId));
         Address saved = addressRepository.save(address);
         return saved.getAddressId();
-    }
-
-    private Person validExistingPerson(Long personId) {
-        return personService.validPerson(personId);
     }
 
     public void updateAddress(AddressDto addressRequest, Long personId, Long addressId) {
@@ -41,6 +37,14 @@ public class AddressService {
         Address address = validExistingAddress(addressId);
         setValueAddress(addressRequest, address);
         addressRepository.save(address);
+    }
+
+    public List<AddressDto> getAddresses(Long personId, String ids) {
+        validExistingPerson(personId);
+        if (isDefaultValue(ids)) {
+            return AddressConverter.addressesToAddressDto(addressRepository.findAllByPersonPersonId(personId));
+        }
+        return AddressConverter.addressesToAddressDto(addressRepository.findAllByPersonPersonIdAndAddressIdIn(personId, verifyAsListValue(ids)));
     }
 
     public void updatePrincipalAddress(Long personId, Long addressId) {
@@ -67,14 +71,6 @@ public class AddressService {
                     address.setPrincipal(false);
                     addressRepository.save(address);
                 });
-    }
-
-    public List<AddressDto> getAddresses(Long personId, String ids) {
-        validExistingPerson(personId);
-        if (isDefaultValue(ids)) {
-            return AddressConverter.addressesToAddressDto(addressRepository.findAllByPersonPersonId(personId));
-        }
-        return AddressConverter.addressesToAddressDto(addressRepository.findAllByPersonPersonIdAndAddressIdIn(personId, verifyAsListValue(ids)));
     }
 
     private Address validExistingAddress(Long addressId) {
@@ -109,5 +105,8 @@ public class AddressService {
         address.setPrincipal(addressRequest.getPrincipal());
     }
 
+    private Person validExistingPerson(Long personId) {
+        return personService.validPerson(personId);
+    }
 
 }
