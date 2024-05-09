@@ -81,9 +81,12 @@ public class AddressService {
     private List<Long> splitIds(String ids) {
         if (hasMultipleNames(ids)) {
             return Arrays.stream(ids.split(","))
+                    .map(String::trim)
                     .map(Long::valueOf).toList();
         }
-        return Stream.of(ids).map(Long::valueOf).toList();
+        return Stream.of(ids)
+                .map(String::trim)
+                .map(Long::valueOf).toList();
     }
 
     private static boolean isEmpty(String names) {
