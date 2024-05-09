@@ -1,28 +1,47 @@
 package br.com.peoplemanager.controller;
 
+import br.com.peoplemanager.entity.Address;
+import br.com.peoplemanager.entity.Person;
+import br.com.peoplemanager.repository.AddressRepository;
+import br.com.peoplemanager.repository.PersonRepository;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.time.LocalDate;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
-@Sql(scripts = {"/schema.sql"})
-@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
+@Sql(scripts = {"/insert_tables.sql"},
+        executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 @SpringBootTest
 @AutoConfigureMockMvc
 class AddressControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @SpyBean
+    AddressRepository addressRepository;
+    @BeforeEach
+    void setUp() {
+        doReturn(Address.builder().addressId(1L)
+                .city("city").street("street").build())
+                .when(addressRepository).save(any(Address.class));
+    }
+
     @Test
     @DisplayName("Should success when save address")
     void shouldSuccessWhenSaveAddress() throws Exception {
