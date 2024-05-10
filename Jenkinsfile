@@ -41,11 +41,6 @@ pipeline {
                 sshagent(['ec2-user']) {
                     sh '''
                         ssh ubuntu@52.67.136.147 << EOF
-                        pkill -f "java -jar people-manager-0.0.1-SNAPSHOT.jar"
-                        EOF
-                    '''
-                    sh '''
-                        ssh ubuntu@52.67.136.147 << EOF
                         cd /home/ubuntu
                         java -jar people-manager-0.0.1-SNAPSHOT.jar
                     '''
