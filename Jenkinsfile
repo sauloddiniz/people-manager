@@ -12,7 +12,7 @@ node {
           sh "mvn test -Punit"
         }
         stage('Build Docker image') {
-          sh "docker build -t app ."
+          sh "docker build --no-cache -t app ."
         }
     }
 }
