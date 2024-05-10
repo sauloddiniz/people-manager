@@ -11,6 +11,7 @@ info:
   version: 1.0.11
 servers:
   - url: http://localhost:8080/api
+  - url: http://52.67.136.147:8080/api
 tags:
   - name: person
     description: description by person
