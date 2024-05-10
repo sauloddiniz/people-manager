@@ -1,5 +1,4 @@
 pipeline {
-
     agent any
 
     stages {
@@ -10,10 +9,13 @@ pipeline {
             }
         }
 
-        stage('Display files') {
+        stage('Verify SSH connect') {
             steps {
-                echo 'List files'
-                sh "ls -la"
+                sshagent(credentials: ['ec2-user']) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no ec2-user@18.228.36.202
+                    '''
+                }
             }
         }
 
@@ -24,10 +26,13 @@ pipeline {
             }
         }
 
-        stage('Build Docker image') {
+        stage('Copy jar to remote server') {
             steps {
-                echo 'Beginning docker build image'
-                sh "docker build --no-cache -t app ."
+                sshagent(credentials: ['ec2-user']) {
+                    sh '''
+                        scp target/people-manager-0.0.1-SNAPSHOT.jar ec2-user@18.228.36.202:/home/ec2-user
+                    '''
+                }
             }
         }
     }
