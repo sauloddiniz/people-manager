@@ -10,7 +10,6 @@ import lombok.*;
 @Setter
 @Builder
 public class Address {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ADDRESS_ID")
