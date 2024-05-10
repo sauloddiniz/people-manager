@@ -22,7 +22,7 @@ pipeline {
         stage("Tests") {
             steps {
                 echo 'Beginning tests'
-                sh "mvn test -Punit"
+                sh "mvn clean install"
             }
         }
 
