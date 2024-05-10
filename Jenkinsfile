@@ -42,7 +42,7 @@ pipeline {
                     sh '''
                         ssh ubuntu@52.67.136.147 << EOF
                         cd /home/ubuntu
-                        java -jar people-manager-0.0.1-SNAPSHOT.jar
+                        nohup java -jar people-manager-0.0.1-SNAPSHOT.jar > output.log 2>&1 &
                     '''
                 }
             }
