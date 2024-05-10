@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['ec2-user']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ec2-user@18.228.36.202
+                        ssh -o StrictHostKeyChecking=no ubuntu@52.67.136.147
                     '''
                 }
             }
@@ -30,10 +30,23 @@ pipeline {
             steps {
                 sshagent(credentials: ['ec2-user']) {
                     sh '''
-                        scp target/people-manager-0.0.1-SNAPSHOT.jar ec2-user@18.228.36.202:/home/ec2-user
+                        scp target/people-manager-0.0.1-SNAPSHOT.jar ubuntu@52.67.136.147:/home/ubuntu
                     '''
                 }
             }
         }
+
+       stage('Execute project on remote server') {
+            steps {
+                sshagent(['ec2-user']) {
+                    sh '''
+                        ssh ubuntu@52.67.136.147 << EOF
+                        cd /home/ubuntu
+                        nohup java -jar people-manager-0.0.1-SNAPSHOT.jar &
+                    '''
+                }
+            }
+        }
+
     }
 }
