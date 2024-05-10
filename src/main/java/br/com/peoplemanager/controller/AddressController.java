@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/person/{personId}/addresses")
+@CrossOrigin(origins = "*")
 public class AddressController {
 
     private final AddressService addressService;
