@@ -9,6 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>br.com</groupId>
+    <packaging>war</packaging>
     <artifactId>people-manager</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>people-manager</name>

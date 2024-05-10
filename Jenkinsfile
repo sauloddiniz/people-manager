@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        registry = "saulodias/people-manager"
+        registry = "saulodias/repository"
         registryCredential = 'docker_hub'
         dockerImage = ''
     }
@@ -15,30 +15,21 @@ pipeline {
             }
         }
 
-        stage("Tests") {
+       stage("Tests") {
             steps {
                 echo 'Beginning tests'
                 sh "mvn clean install"
             }
         }
 
-         stage('Building our image') {
-            steps{
-                script {
-                    dockerImage = docker.build registry
+        stage('Copy war file to tomcat server') {
+            steps {
+                sshagent(credentials: ['ec2-user']) {
+                    sh '''
+                        scp target/people-manager-0.0.1-SNAPSHOT.war ubuntu@54.232.197.138:/home/ubuntu
+                    '''
                 }
             }
         }
-
-        stage('Deploy our image') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                    }
-                }
-            }
-        }
-
     }
 }
