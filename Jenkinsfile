@@ -1,17 +1,27 @@
-node {
-    stage("Clone the project") {
-        git branch: 'master', url: 'https://github.com/sauloddiniz/people-manager.git'
-    }
+pipeline {
+    stages {
+        stage("Clone the project") {
+            steps {
+                git branch: 'master', url: 'https://github.com/sauloddiniz/people-manager.git'
+            }
+        }
 
-    stage('Display files') {
-        sh "ls -la"
-    }
+        stage('Display files') {
+            steps {
+                sh "ls -la"
+            }
+        }
 
-    stage("Tests") {
-        sh "mvn test -Punit"
-    }
+        stage("Tests") {
+            steps {
+                sh "mvn test -Punit"
+            }
+        }
 
-    stage('Build Docker image') {
-        sh "docker build --no-cache -t app ."
+        stage('Build Docker image') {
+            steps {
+                sh "docker build --no-cache -t app ."
+            }
+        }
     }
 }
