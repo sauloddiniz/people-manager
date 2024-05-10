@@ -7,12 +7,11 @@ node {
         sh "ls -la"
     }
 
-    stage("Tests and Build image docker") {
-        stage("Runing unit tests") {
-          sh "mvn test -Punit"
-        }
-        stage('Build Docker image') {
-          sh "docker build --no-cache -t app ."
-        }
+    stage("Tests") {
+        sh "mvn test -Punit"
+    }
+
+    stage('Build Docker image') {
+        sh "docker build --no-cache -t app ."
     }
 }
