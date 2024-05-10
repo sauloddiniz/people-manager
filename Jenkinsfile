@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sshagent(credentials: ['ec2-user']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no ubuntu@54.232.197.138
+                        ssh -o StrictHostKeyChecking=no ec2-user@18.230.129.80
                     '''
                 }
             }
@@ -31,8 +31,8 @@ pipeline {
             steps {
                 sshagent(credentials: ['ec2-user']) {
                     sh '''
-                        scp target/people-manager-0.0.1-SNAPSHOT.war ubuntu@54.232.197.138:~/people-manager.war
-                        ssh ubuntu@54.232.197.138 "sudo mv ~/people-manager.war /opt/tomcat/webapps/"
+                        scp target/people-manager-0.0.1-SNAPSHOT.war ec2-user@18.230.129.80:~/people-manager.war
+                        ssh ec2-user@18.230.129.80 "sudo mv ~/people-manager.war /opt/tomcat/webapps/"
                     '''
 
                 }
