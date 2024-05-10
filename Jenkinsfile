@@ -39,11 +39,6 @@ pipeline {
        stage('Execute project on remote server') {
             steps {
                 sshagent(['ec2-user']) {
-                     sh '''
-                        ssh ubuntu@52.67.136.147 << EOF
-                        cd /home/ubuntu
-                        kill $(cat app.pid)
-                    '''
                     sh '''
                         ssh ubuntu@52.67.136.147 << EOF
                         cd /home/ubuntu
