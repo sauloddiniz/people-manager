@@ -18,8 +18,5 @@ spring:
   h2:
     console:
       enabled: true
-server:
-  servlet:
-    context-path: /api
 
 
