@@ -10,8 +10,8 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 1.0.11
 servers:
-  - url: http://localhost:8080
   - url: http://18.230.129.80:8080/people-manager
+  - url: http://localhost:8080
 tags:
   - name: person
     description: description by person
