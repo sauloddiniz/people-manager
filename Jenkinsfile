@@ -34,7 +34,6 @@ pipeline {
                         scp target/people-manager-0.0.1-SNAPSHOT.war ec2-user@18.230.129.80:~/people-manager.war
                         ssh ec2-user@18.230.129.80 "sudo mv ~/people-manager.war /opt/tomcat/webapps/"
                     '''
-
                 }
             }
         }
