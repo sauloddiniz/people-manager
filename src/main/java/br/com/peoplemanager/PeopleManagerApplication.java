@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class PeopleManagerApplication extends SpringBootServletInitializer {
 
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+    protected SpringApplicationBuilder configure(
+            SpringApplicationBuilder builder) {
         return builder.sources(PeopleManagerApplication.class);
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(PeopleManagerApplication.class, args);
+        SpringApplication springApplication = new SpringApplication(
+                PeopleManagerApplication.class);
+        springApplication.run(args);
     }
 
 
