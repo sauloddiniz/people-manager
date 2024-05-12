@@ -9,6 +9,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Builder
 public class PersonDto {
+    private String personId;
     @NotEmpty
     private String fullName;
     @NotEmpty

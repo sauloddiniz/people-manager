@@ -20,6 +20,7 @@ public class PersonConverter {
     public static List<PersonDto> personsToPersonsDto(List<Person> persons) {
         Function<Person, PersonDto> converter =
                 person -> PersonDto.builder()
+                        .personId(String.valueOf(person.getPersonId()))
                         .birthDate(DateConverter.converterLocalDateToString(person.getBirthDate()))
                         .fullName(person.getFullName())
                     .build();
