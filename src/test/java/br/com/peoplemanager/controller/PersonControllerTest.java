@@ -90,7 +90,7 @@ class PersonControllerTest {
 
         final String jsonPersonIncomplete = """
                 {
-                  "fullName": "Saulo",
+                  "fullName": "Jose de Assis",
                   "birthDate": "2024-05-08"
                 }
                 """;
@@ -101,6 +101,29 @@ class PersonControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(
                         status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("Should throw error when try save person only first name")
+    void shouldThrowErrorWhenTrySavePersonOnlyFirstName() throws Exception {
+
+        final String jsonPersonIncomplete = """
+                {
+                  "fullName": "Jose",
+                  "birthDate": "2024-05-08"
+                }
+                """;
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                        .post("/person")
+                        .content(jsonPersonIncomplete)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(
+                        jsonPath("$.message")
+                                .value("fullName: Full name must contain at least two words."))
+                .andExpect(
+                        status().isBadRequest())
                 .andDo(print());
     }
 
