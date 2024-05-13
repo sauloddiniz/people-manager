@@ -18,4 +18,5 @@ mvn spring-boot:run
 ````
 
 ### Documentacao dos controladores
-* [Swagger-local](http://localhost:8080/api/swagger-ui/index.html)
+* [Swagger-local](http://localhost:8080/swagger-ui/index.html)
+* [Swagger-app-online](http://18.230.129.80:8080/people-manager/swagger-ui/index.html)
