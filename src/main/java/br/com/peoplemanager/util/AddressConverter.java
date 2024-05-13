@@ -4,6 +4,7 @@ import br.com.peoplemanager.dto.address.AddressDto;
 import br.com.peoplemanager.dto.person.PersonDto;
 import br.com.peoplemanager.entity.Address;
 import br.com.peoplemanager.entity.Person;
+import br.com.peoplemanager.enuns.StateEnum;
 
 import java.util.List;
 import java.util.function.Function;
@@ -17,7 +18,7 @@ public class AddressConverter {
                 .street(addressRequest.getStreet())
                 .zipCode(addressRequest.getZipCode())
                 .city(addressRequest.getCity())
-                .state(addressRequest.getState())
+                .state(StateEnum.fromString(addressRequest.getState()))
                 .principal(addressRequest.getPrincipal())
                 .number(addressRequest.getNumber())
                 .person(person)
@@ -31,7 +32,7 @@ public class AddressConverter {
                         .principal(address.getPrincipal())
                         .city(address.getCity())
                         .number(address.getNumber())
-                        .state(address.getState())
+                        .state(String.valueOf(address.getState().getName()))
                         .street(address.getStreet())
                         .zipCode(address.getZipCode())
                         .build();

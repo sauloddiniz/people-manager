@@ -136,7 +136,7 @@ paths:
           description: created
           headers:
             Location:
-              description: URI location created by person
+              description: URI location created by address
               schema:
                 type: string
         '400':
@@ -288,6 +288,7 @@ components:
       properties:
         fullName:
           type: string
+          example: Jose Jr. Alvarez
         birthDate:
           type: string
           format: date
@@ -304,10 +305,10 @@ components:
       properties:
         street:
           type: string
-          example: Duque de Caxias
+          example: Rua das Laranjeiras
         city:
           type: string
-          example: Coronel Fabriciano
+          example: Fabri City
         state:
           type: string
           example: MG
@@ -325,7 +326,7 @@ components:
       properties:
         date:
           type: string
-          format: Wed May 08 00:00:00 BRT 2024
+          example: Mon May 13 10:59:34 UTC 2024
         status:
           type: integer
           example: 400
@@ -334,7 +335,7 @@ components:
           example: /person
         message:
           type: string
-          example: Error field
+          example: Message error
         method:
           type: string
           example: POST

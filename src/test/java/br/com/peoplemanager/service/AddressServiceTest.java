@@ -3,6 +3,7 @@ package br.com.peoplemanager.service;
 import br.com.peoplemanager.dto.address.AddressDto;
 import br.com.peoplemanager.entity.Address;
 import br.com.peoplemanager.entity.Person;
+import br.com.peoplemanager.enuns.StateEnum;
 import br.com.peoplemanager.repository.AddressRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,8 +49,8 @@ class AddressServiceTest {
 
     private List<Address> createListAddresses() {
         return List.of(
-                Address.builder().principal(false).number("123").zipCode("35170-087").city("Fabri City").street("rua").build(),
-                Address.builder().principal(true).number("148").zipCode("35170-089").city("Gothan City").street("rua").build()
+                Address.builder().principal(false).number("123").zipCode("35170-087").city("Fabri City").state(StateEnum.MG).street("rua").build(),
+                Address.builder().principal(true).number("148").zipCode("35170-089").city("Gothan City").state(StateEnum.AL).street("rua").build()
         );
     }
 

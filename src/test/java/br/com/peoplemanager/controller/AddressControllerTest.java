@@ -132,8 +132,8 @@ class AddressControllerTest {
 
         String expectedResponse = """
             [
-                {"id":"1","street":"Rua de algum lugar","zipCode":"35170-009","number":"987456","city":"Cel Fabriciano","state":"MG","principal":false},
-                {"id":"2","street":"Rua de algum lugar dois","zipCode":"35170-008","number":"987456","city":"Cel Fabriciano","state":"MG","principal":true}
+                {"id":"1","street":"Rua de algum lugar","zipCode":"35170-009","number":"987456","city":"Cel Fabriciano","state":"Minas Gerais","principal":false},
+                {"id":"2","street":"Rua de algum lugar dois","zipCode":"35170-008","number":"987456","city":"Cel Fabriciano","state":"Minas Gerais","principal":true}
             ]
         """;
 
@@ -152,7 +152,7 @@ class AddressControllerTest {
     void shouldSuccessWhenFilterAddressUsingIdParams() throws Exception {
 
         String expectedResponse = """
-            [{"id":"1","street":"Rua de algum lugar","zipCode":"35170-009","number":"987456","city":"Cel Fabriciano","state":"MG","principal":false}]
+            [{"id":"1","street":"Rua de algum lugar","zipCode":"35170-009","number":"987456","city":"Cel Fabriciano","state":"Minas Gerais","principal":false}]
         """;
 
         this.mockMvc.perform(MockMvcRequestBuilders

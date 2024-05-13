@@ -3,6 +3,7 @@ package br.com.peoplemanager.service;
 import br.com.peoplemanager.dto.address.AddressDto;
 import br.com.peoplemanager.entity.Address;
 import br.com.peoplemanager.entity.Person;
+import br.com.peoplemanager.enuns.StateEnum;
 import br.com.peoplemanager.exception.AddressNotFoundException;
 import br.com.peoplemanager.repository.AddressRepository;
 import br.com.peoplemanager.util.AddressConverter;
@@ -99,7 +100,7 @@ public class AddressService {
 
     private static void setValueAddress(AddressDto addressRequest, Address address) {
         address.setCity(addressRequest.getCity());
-        address.setState(addressRequest.getState());
+        address.setState(StateEnum.valueOf(addressRequest.getState()));
         address.setNumber(addressRequest.getNumber());
         address.setZipCode(addressRequest.getZipCode());
         address.setStreet(addressRequest.getStreet());

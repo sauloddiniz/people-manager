@@ -1,5 +1,6 @@
 package br.com.peoplemanager.entity;
 
+import br.com.peoplemanager.enuns.StateEnum;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,7 +27,8 @@ public class Address {
     @Column(name = "CITY")
     private String city;
     @Column(name = "STATE")
-    private String state;
+    @Enumerated(EnumType.STRING)
+    private StateEnum state;
     @Column(name = "PRINCIPAL")
     private Boolean principal;
 }
