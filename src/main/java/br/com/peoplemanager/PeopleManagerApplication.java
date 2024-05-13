@@ -21,17 +21,6 @@ public class PeopleManagerApplication extends SpringBootServletInitializer {
                 PeopleManagerApplication.class);
         springApplication.run(args);
     }
-
-
-    @RestController
-    public static class WarInitializerController {
-
-        @GetMapping("/")
-        public String handler() {
-            return "Hello World";
-        }
-    }
-
 }
 
 
