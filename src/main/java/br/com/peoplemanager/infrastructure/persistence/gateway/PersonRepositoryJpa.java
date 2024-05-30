@@ -27,15 +27,26 @@ public class PersonRepositoryJpa implements PersonRepositoryGateway {
     }
     @Override
     public List<PersonDto> getAllPersons() {
-        return repository.findAll().stream().map(PersonMapper::toDto).toList();
+        return repository
+                .findAll()
+                .stream()
+                .map(PersonMapper::toDto)
+                .toList();
     }
     @Override
     public List<PersonDto> filterPerson(List<String> names) {
-        return repository.findAll(where(PersonRepository.containsHasName(names))).stream().map(PersonMapper::toDto).toList();
+        return repository
+                .findAll(where(PersonRepository
+                        .containsHasName(names)))
+                .stream()
+                .map(PersonMapper::toDto)
+                .toList();
     }
     @Override
     public Optional<PersonDto> findById(Long personId) {
-        return repository.findById(personId).map(PersonMapper::toDto);
+        return repository
+                .findById(personId)
+                .map(PersonMapper::toDto);
     }
 
 }
