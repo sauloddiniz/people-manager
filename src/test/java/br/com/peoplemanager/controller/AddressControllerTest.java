@@ -1,7 +1,7 @@
 package br.com.peoplemanager.controller;
 
-import br.com.peoplemanager.entity.Address;
-import br.com.peoplemanager.repository.AddressRepository;
+import br.com.peoplemanager.infrastructure.persistence.model.AddressEntity;
+import br.com.peoplemanager.infrastructure.persistence.AddressRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,9 +33,9 @@ class AddressControllerTest {
     AddressRepository addressRepository;
     @BeforeEach
     void setUp() {
-        doReturn(Address.builder().addressId(1L)
+        doReturn(AddressEntity.builder().addressId(1L)
                 .city("city").street("street").build())
-                .when(addressRepository).save(any(Address.class));
+                .when(addressRepository).save(any(AddressEntity.class));
     }
 
     @Test

@@ -1,7 +1,7 @@
 package br.com.peoplemanager.controller;
 
-import br.com.peoplemanager.entity.Person;
-import br.com.peoplemanager.repository.PersonRepository;
+import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
+import br.com.peoplemanager.infrastructure.persistence.PersonRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,8 +36,8 @@ class PersonControllerTest {
     PersonRepository personRepository;
     @BeforeEach
     void setUp() {
-        doReturn(Person.builder().personId(1L).birthDate(LocalDate.now()).fullName("fullName").build())
-                .when(personRepository).save(any(Person.class));
+        doReturn(PersonEntity.builder().personId(1L).birthDate(LocalDate.now()).fullName("fullName").build())
+                .when(personRepository).save(any(PersonEntity.class));
     }
 
     @Test

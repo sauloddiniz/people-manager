@@ -1,5 +1,6 @@
 package br.com.peoplemanager.util;
 
+import br.com.peoplemanager.naousar.util.DateConverter;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

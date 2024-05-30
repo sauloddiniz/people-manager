@@ -1,14 +1,14 @@
 package br.com.peoplemanager.service;
 
-import br.com.peoplemanager.dto.address.AddressDto;
-import br.com.peoplemanager.entity.Address;
-import br.com.peoplemanager.entity.Person;
-import br.com.peoplemanager.enuns.StateEnum;
-import br.com.peoplemanager.repository.AddressRepository;
-import org.junit.jupiter.api.Assertions;
+import br.com.peoplemanager.domain.entity.dto.AddressDto;
+import br.com.peoplemanager.infrastructure.persistence.model.AddressEntity;
+import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
+import br.com.peoplemanager.naousar.enuns.StateEnum;
+import br.com.peoplemanager.infrastructure.persistence.AddressRepository;
+import br.com.peoplemanager.naousar.service.AddressService;
+import br.com.peoplemanager.naousar.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -40,17 +40,17 @@ class AddressServiceTest {
     @BeforeEach
     void setUp() {
         lenient().when(personService.validPerson(anyLong()))
-                .thenReturn(Person.builder().build());
+                .thenReturn(PersonEntity.builder().build());
         lenient().when(addressRepository.findAllByPersonPersonId(anyLong()))
                 .thenReturn(createListAddresses());
         lenient().when(addressRepository.findAllByPersonPersonIdAndAddressIdIn(anyLong(),anyCollection())).
                 thenReturn(createListAddresses());
     }
 
-    private List<Address> createListAddresses() {
+    private List<AddressEntity> createListAddresses() {
         return List.of(
-                Address.builder().principal(false).number("123").zipCode("35170-087").city("Fabri City").state(StateEnum.MG).street("rua").build(),
-                Address.builder().principal(true).number("148").zipCode("35170-089").city("Gothan City").state(StateEnum.AL).street("rua").build()
+                AddressEntity.builder().principal(false).number("123").zipCode("35170-087").city("Fabri City").state(StateEnum.MG).street("rua").build(),
+                AddressEntity.builder().principal(true).number("148").zipCode("35170-089").city("Gothan City").state(StateEnum.AL).street("rua").build()
         );
     }
 

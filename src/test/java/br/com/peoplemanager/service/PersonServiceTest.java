@@ -1,9 +1,8 @@
 package br.com.peoplemanager.service;
 
-import br.com.peoplemanager.dto.person.PersonDto;
-import br.com.peoplemanager.entity.Person;
-import br.com.peoplemanager.repository.PersonRepository;
-import org.junit.jupiter.api.Assertions;
+import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
+import br.com.peoplemanager.infrastructure.persistence.PersonRepository;
+import br.com.peoplemanager.naousar.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,10 +51,10 @@ class PersonServiceTest {
         return Stream.of(null, "", "Saulo, Dias", "Saulo", "Dias,", ",Diniz");
     }
 
-    private List<Person> createList() {
+    private List<PersonEntity> createList() {
         return List.of(
-                Person.builder().fullName("Jose das Couves").birthDate(LocalDate.now()).build(),
-                Person.builder().fullName("Maria dos Tomates").birthDate(LocalDate.now()).build()
+                PersonEntity.builder().fullName("Jose das Couves").birthDate(LocalDate.now()).build(),
+                PersonEntity.builder().fullName("Maria dos Tomates").birthDate(LocalDate.now()).build()
         );
     }
 
