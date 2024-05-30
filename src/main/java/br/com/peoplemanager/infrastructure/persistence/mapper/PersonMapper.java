@@ -12,8 +12,9 @@ public class PersonMapper {
     public static Person toDomain(PersonEntity personEntity) {
         return new Person(personEntity.getPersonId(), personEntity.getFullName(), personEntity.getBirthDate());
     }
-
+    
     public static PersonDto toDto(PersonEntity personEntity) {
-        return new PersonDto(personEntity.getPersonId(), personEntity.getFullName(), personEntity.getBirthDate());
+        return new PersonDto(personEntity.getPersonId(), personEntity.getFullName(), personEntity.getBirthDate(),
+                personEntity.getAddresses().stream().map(AddressMapper::toModel).toList());
     }
 }

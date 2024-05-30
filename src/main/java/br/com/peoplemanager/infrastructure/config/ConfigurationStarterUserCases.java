@@ -30,13 +30,12 @@ public class ConfigurationStarterUserCases {
         return new GetPerson(repositoryGateway);
     }
     @Bean
-    public SaveAddress saveAddressUseCase(AddressRepositoryGateway repositoryGateway,
-                                          PersonRepositoryGateway personRepositoryGateway) {
-        return new SaveAddress(repositoryGateway, personRepositoryGateway);
+    public SaveAddress saveAddressUseCase(AddressRepositoryGateway repositoryGateway, GetPerson getPerson) {
+        return new SaveAddress(repositoryGateway, getPerson);
     }
     @Bean
     public ListAddress listAddressUseCase(AddressRepositoryGateway repositoryGateway,
-                                          PersonRepositoryGateway personRepositoryGateway) {
-        return new ListAddress(repositoryGateway, personRepositoryGateway);
+                                          GetPerson getPerson) {
+        return new ListAddress(repositoryGateway, getPerson);
     }
 }

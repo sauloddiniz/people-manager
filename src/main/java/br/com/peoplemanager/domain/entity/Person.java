@@ -6,14 +6,16 @@ import br.com.peoplemanager.domain.exception.PersonRequestFullNameException;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
     private Long personId;
     private String fullName;
     private LocalDate birthDate;
-    private final List<Address> addresses = new ArrayList<>();
+    private  List<Address> addresses;
+
+    public Person() {
+    }
 
     public Person(String fullName, LocalDate birthDate) {
         validFullName(fullName);
@@ -21,9 +23,14 @@ public class Person {
         this.fullName = fullName;
         this.birthDate = birthDate;
     }
+    public Person(Long personId, String fullName, LocalDate birthDate, List<Address> addresses) {
+        this.addresses = addresses;
+        this.personId = personId;
+        this.fullName = fullName;
+        this.birthDate = birthDate;
+    }
+
     public Person(Long personId, String fullName, LocalDate birthDate) {
-        validFullName(fullName);
-        validBirthDate(birthDate);
         this.personId = personId;
         this.fullName = fullName;
         this.birthDate = birthDate;

@@ -24,6 +24,6 @@ public class AddressMapper {
 
     public static AddressDto toModel(AddressEntity address) {
         return new AddressDto(address.getAddressId(), address.getStreet(), address.getZipCode(), address.getNumber(),
-                address.getCity(), address.getState().toString(), address.getPrincipal());
+                address.getCity(), address.getState().getName(), address.getPrincipal());
     }
 }

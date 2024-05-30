@@ -28,6 +28,16 @@ public class Address {
         this.person = person;
     }
 
+    public Address(Long addressId, String street, String zipCode, String number, String city, StateEnum state, Boolean principal) {
+        this.addressId = addressId;
+        this.street = street;
+        this.zipCode = zipCode;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+        this.principal = principal;
+    }
+
     private void validCity(String city) {
         if (city == null || city.isBlank()) {
             throw new AddressInvalidException("City not empty");
@@ -39,13 +49,11 @@ public class Address {
             throw new AddressInvalidException("Number not empty");
         }
     }
-
     private void validZipCode(String zipCode) {
         if (zipCode == null || zipCode.isBlank()) {
             throw new AddressInvalidException("Zipcode not empty");
         }
     }
-
     private void validStreet(String street) {
         if (street == null || street.isBlank()) {
             throw new AddressInvalidException("Street not empty");
