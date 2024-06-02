@@ -1,7 +1,7 @@
 package br.com.peoplemanager.service;
 
-import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
-import br.com.peoplemanager.infrastructure.persistence.PersonRepository;
+import br.com.peoplemanager.infrastructure.persistence.entity.PersonEntity;
+import br.com.peoplemanager.infrastructure.persistence.repository.PersonRepository;
 import br.com.peoplemanager.naousar.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

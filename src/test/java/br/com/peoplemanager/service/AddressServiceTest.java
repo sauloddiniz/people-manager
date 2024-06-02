@@ -1,10 +1,10 @@
 package br.com.peoplemanager.service;
 
 import br.com.peoplemanager.domain.entity.dto.AddressDto;
-import br.com.peoplemanager.infrastructure.persistence.model.AddressEntity;
-import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
+import br.com.peoplemanager.infrastructure.persistence.entity.AddressEntity;
+import br.com.peoplemanager.infrastructure.persistence.entity.PersonEntity;
 import br.com.peoplemanager.naousar.enuns.StateEnum;
-import br.com.peoplemanager.infrastructure.persistence.AddressRepository;
+import br.com.peoplemanager.infrastructure.persistence.repository.AddressRepository;
 import br.com.peoplemanager.naousar.service.AddressService;
 import br.com.peoplemanager.naousar.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;

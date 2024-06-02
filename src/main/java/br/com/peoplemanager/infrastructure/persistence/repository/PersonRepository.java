@@ -1,6 +1,6 @@
-package br.com.peoplemanager.infrastructure.persistence;
+package br.com.peoplemanager.infrastructure.persistence.repository;
 
-import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
+import br.com.peoplemanager.infrastructure.persistence.entity.PersonEntity;
 import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;

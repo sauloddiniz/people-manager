@@ -6,13 +6,15 @@ import br.com.peoplemanager.domain.exception.PersonRequestFullNameException;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Person {
     private Long personId;
     private String fullName;
     private LocalDate birthDate;
-    private  List<Address> addresses;
+    private List<Address> addresses;
 
     public Person() {
     }
@@ -23,6 +25,7 @@ public class Person {
         this.fullName = fullName;
         this.birthDate = birthDate;
     }
+
     public Person(Long personId, String fullName, LocalDate birthDate, List<Address> addresses) {
         this.addresses = addresses;
         this.personId = personId;
@@ -76,10 +79,12 @@ public class Person {
                 ", birthDate=" + birthDate +
                 '}';
     }
+
     private void validBirthDate(LocalDate birthDate) {
         validBirthDateIsNotNull(birthDate);
         validateAgeIsAtLeast18(birthDate);
     }
+
     private static void validBirthDateIsNotNull(LocalDate birthDate) {
         if (birthDate == null) {
             throw new PersonRequestBirthDateException("Birth date cannot be null");
@@ -93,10 +98,38 @@ public class Person {
             throw new PersonRequestBirthDateException("The person must be at least 18 years old. BirthDate: " + year);
         }
     }
+
     private void validFullName(String fullName) {
         if (fullName == null || fullName.isBlank() || !fullName.matches("^\\w+\\s+\\w+.*$")) {
             throw new PersonRequestFullNameException(fullName);
         }
+    }
+
+    public List<Address> changePrincipalAddress(Address address) {
+        List<Address> principalAddress = new ArrayList<>();
+        if (!this.addresses.isEmpty() && address.getPrincipal()) {
+            principalAddress = this.addresses
+                    .stream()
+                    .filter(Address::getPrincipal).toList();
+            turnFalsePrincipalAddress(principalAddress);
+        }
+        return principalAddress;
+    }
+
+    private void turnFalsePrincipalAddress(List<Address> principalAddress) {
+        principalAddress.forEach(addr -> {
+            addr.setPerson(this);
+            addr.setPrincipal(false);
+        });
+    }
+
+    public Address getPrincipalAddress() {
+       for (Address address : this.addresses) {
+           if (address.getPrincipal()) {
+               return address;
+           }
+       }
+       return null;
     }
 
 }

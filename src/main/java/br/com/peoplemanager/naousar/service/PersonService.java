@@ -3,7 +3,7 @@
 //import br.com.peoplemanager.infrastructure.controller.dto.PersonDto;
 //import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
 //import br.com.peoplemanager.naousar.exception.PersonNotFoundException;
-//import br.com.peoplemanager.infrastructure.persistence.PersonRepository;
+//import br.com.peoplemanager.infrastructure.persistence.repository.PersonRepository;
 //import br.com.peoplemanager.naousar.util.DateConverter;
 //import br.com.peoplemanager.naousar.util.PersonConverter;
 //import org.springframework.stereotype.Service;

@@ -3,11 +3,17 @@ package br.com.peoplemanager.domain.entity.dto;
 import br.com.peoplemanager.domain.entity.Person;
 
 import java.time.LocalDate;
-import java.util.List;
 
-public record PersonDto(Long personId, String fullName, LocalDate birthDate, List<AddressDto> addressDtoList) {
+public record PersonDto(Long personId, String fullName, LocalDate birthDate, AddressDto principalAddress) {
     public Person toModel(){
-        return new Person(personId, fullName, birthDate,
-                addressDtoList.stream().map(AddressDto::toModel).toList());
+        return new Person(personId, fullName, birthDate);
     };
+
+    public static PersonDto fromModel(Person person) {
+        return new PersonDto(person.getPersonId(), person.getFullName(), person.getBirthDate(),
+                person.getPrincipalAddress() != null
+                        ? AddressDto.fromModel(person.getPrincipalAddress())
+                        : null
+                );
+    }
 }

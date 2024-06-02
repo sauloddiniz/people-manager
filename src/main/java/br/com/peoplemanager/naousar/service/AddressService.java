@@ -5,7 +5,7 @@
 //import br.com.peoplemanager.infrastructure.persistence.model.PersonEntity;
 //import br.com.peoplemanager.naousar.enuns.StateEnum;
 //import br.com.peoplemanager.naousar.exception.AddressNotFoundException;
-//import br.com.peoplemanager.infrastructure.persistence.AddressRepository;
+//import br.com.peoplemanager.infrastructure.persistence.repository.AddressRepository;
 //import br.com.peoplemanager.naousar.util.AddressConverter;
 //import org.springframework.stereotype.Service;
 //

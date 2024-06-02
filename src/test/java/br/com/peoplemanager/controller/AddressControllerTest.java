@@ -1,7 +1,7 @@
 package br.com.peoplemanager.controller;
 
-import br.com.peoplemanager.infrastructure.persistence.model.AddressEntity;
-import br.com.peoplemanager.infrastructure.persistence.AddressRepository;
+import br.com.peoplemanager.infrastructure.persistence.entity.AddressEntity;
+import br.com.peoplemanager.infrastructure.persistence.repository.AddressRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

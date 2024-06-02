@@ -1,6 +1,6 @@
-package br.com.peoplemanager.infrastructure.persistence;
+package br.com.peoplemanager.infrastructure.persistence.repository;
 
-import br.com.peoplemanager.infrastructure.persistence.model.AddressEntity;
+import br.com.peoplemanager.infrastructure.persistence.entity.AddressEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

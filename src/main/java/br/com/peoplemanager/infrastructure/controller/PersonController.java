@@ -19,12 +19,10 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class PersonController {
     private final SavePerson savePerson;
-    private final ListPersons listPersons;
     private final FilterPersons filterPersons;
     private final GetPerson getPerson;
-    public PersonController(SavePerson savePerson, ListPersons listPersons, FilterPersons filterPersons, GetPerson getPerson) {
+    public PersonController(SavePerson savePerson, FilterPersons filterPersons, GetPerson getPerson) {
         this.savePerson = savePerson;
-        this.listPersons = listPersons;
         this.filterPersons = filterPersons;
         this.getPerson = getPerson;
     }
@@ -47,17 +45,14 @@ public class PersonController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<PersonDto>> getPersons() {
-        return ResponseEntity.ok().body(listPersons.execute());
-    }
-
-    @GetMapping("/filter")
-    public ResponseEntity<List<PersonDto>> filterPersons(@RequestParam("names") String names) {
-        return ResponseEntity.ok().body(filterPersons.execute(names));
+    public ResponseEntity<List<PersonDto>> filterPersons(
+            @RequestParam(value = "names", defaultValue = "", required = false) String names) {
+        List<Person> personList = filterPersons.execute(names);
+        return ResponseEntity.ok().body(personList.stream().map(PersonDto::fromModel).toList());
     }
 
     @GetMapping("/{personId}")
     public ResponseEntity<PersonDto> getPerson(@PathVariable("personId") Long personId) {
-        return ResponseEntity.ok().body(getPerson.execute(personId));
+        return ResponseEntity.ok().body(PersonDto.fromModel(getPerson.execute(personId)));
     }
 }

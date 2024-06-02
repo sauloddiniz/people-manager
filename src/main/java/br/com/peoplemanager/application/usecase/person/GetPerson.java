@@ -1,16 +1,16 @@
 package br.com.peoplemanager.application.usecase.person;
 
-import br.com.peoplemanager.application.gateway.PersonRepositoryGateway;
-import br.com.peoplemanager.domain.entity.dto.PersonDto;
+import br.com.peoplemanager.application.gateway.PersonPersistence;
+import br.com.peoplemanager.domain.entity.Person;
 import br.com.peoplemanager.domain.exception.PersonNotFoundException;
 
 public class GetPerson {
-    private final PersonRepositoryGateway repository;
-    public GetPerson(PersonRepositoryGateway repository) {
-        this.repository = repository;
+    private final PersonPersistence persistence;
+    public GetPerson(PersonPersistence repository) {
+        this.persistence = repository;
     }
-    public PersonDto execute(Long personId) {
-        return repository.findById(personId)
+    public Person execute(Long personId) {
+        return persistence.findById(personId)
                 .orElseThrow(() -> new PersonNotFoundException("Person not found: " + personId));
     }
 }

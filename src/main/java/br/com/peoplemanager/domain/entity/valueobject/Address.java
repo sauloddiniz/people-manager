@@ -29,6 +29,10 @@ public class Address {
     }
 
     public Address(Long addressId, String street, String zipCode, String number, String city, StateEnum state, Boolean principal) {
+        validStreet(street);
+        validZipCode(zipCode);
+        validNumber(number);
+        validCity(city);
         this.addressId = addressId;
         this.street = street;
         this.zipCode = zipCode;

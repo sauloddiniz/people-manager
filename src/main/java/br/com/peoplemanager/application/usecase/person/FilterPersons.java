@@ -1,18 +1,18 @@
 package br.com.peoplemanager.application.usecase.person;
 
-import br.com.peoplemanager.application.gateway.PersonRepositoryGateway;
-import br.com.peoplemanager.domain.entity.dto.PersonDto;
+import br.com.peoplemanager.application.gateway.PersonPersistence;
+import br.com.peoplemanager.domain.entity.Person;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class FilterPersons {
-    private final PersonRepositoryGateway repository;
-    public FilterPersons(PersonRepositoryGateway repository) {
-        this.repository = repository;
+    private final PersonPersistence persistence;
+    public FilterPersons(PersonPersistence repository) {
+        this.persistence = repository;
     }
-    public List<PersonDto> execute(String names) {
+    public List<Person> execute(String names) {
         List<String> list = Arrays.stream(names.split(",")).toList();
-        return repository.filterPerson(list);
+        return persistence.filterPerson(list);
     }
 }
