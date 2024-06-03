@@ -2,10 +2,7 @@ package br.com.peoplemanager.config;
 
 import br.com.peoplemanager.domain.gateway.AddressPersistence;
 import br.com.peoplemanager.domain.gateway.PersonPersistence;
-import br.com.peoplemanager.domain.usecase.address.GetAddress;
-import br.com.peoplemanager.domain.usecase.address.ListAddressByIdPerson;
-import br.com.peoplemanager.domain.usecase.address.SaveAddress;
-import br.com.peoplemanager.domain.usecase.address.UpdateAddress;
+import br.com.peoplemanager.domain.usecase.address.*;
 import br.com.peoplemanager.domain.usecase.person.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -46,12 +43,19 @@ public class ConfigUserCases {
     public ListAddressByIdPerson listAddressUseCase(AddressPersistence persistence) {
         return new ListAddressByIdPerson(persistence);
     }
+
     @Bean
     public UpdateAddress updateAddress(GetAddress getAddress, SaveAddress saveAddress) {
         return new UpdateAddress(getAddress, saveAddress);
     }
+
     @Bean
     public GetAddress getAddress(AddressPersistence persistence) {
         return new GetAddress(persistence);
+    }
+
+    @Bean
+    public UpdatePrincipalAddress updatePrincipalAddress(GetAddress getAddress, SaveAddress saveAddress) {
+        return new UpdatePrincipalAddress(getAddress, saveAddress);
     }
 }

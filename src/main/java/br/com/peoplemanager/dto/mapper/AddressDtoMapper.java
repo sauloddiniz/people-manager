@@ -5,7 +5,7 @@ import br.com.peoplemanager.domain.enums.StateEnum;
 import br.com.peoplemanager.dto.AddressDto;
 
 public class AddressDtoMapper {
-
+    private AddressDtoMapper(){}
     public static Address toModel(AddressDto addressDto) {
         return new Address(addressDto.id(), addressDto.street(), addressDto.zipCode(), addressDto.number(),
                 addressDto.city(), StateEnum.fromString(addressDto.state()), addressDto.principal());

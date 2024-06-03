@@ -4,7 +4,7 @@ import br.com.peoplemanager.domain.model.Address;
 import br.com.peoplemanager.infrastructure.persistence.entity.AddressEntity;
 
 public class AddressEntityMapper {
-
+    private AddressEntityMapper(){}
     public static AddressEntity toEntity(Address address) {
         return AddressEntity.builder()
                 .addressId(address.getAddressId())

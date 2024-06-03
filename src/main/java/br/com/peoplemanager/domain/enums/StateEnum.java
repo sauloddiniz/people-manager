@@ -31,7 +31,8 @@ public enum StateEnum {
     SP("SP", "São Paulo"),
     SE("SE", "Sergipe"),
     TO("TO", "Tocantins");
-
+    public static final String NON_ASCII_REGEX = "[^\\p{ASCII}]";
+    public static final String REPLACEMENT = "";
     private final String code;
     private final String name;
 
@@ -48,14 +49,14 @@ public enum StateEnum {
 
     public static StateEnum fromString(String input) {
         String normalizedInput = Normalizer.normalize(input, Normalizer.Form.NFD)
-                .replaceAll("[^\\p{ASCII}]", "")
+                .replaceAll(NON_ASCII_REGEX, REPLACEMENT)
                 .toLowerCase();
         for (StateEnum state : StateEnum.values()) {
             String normalizedCode = Normalizer.normalize(state.code, Normalizer.Form.NFD)
-                    .replaceAll("[^\\p{ASCII}]", "")
+                    .replaceAll(NON_ASCII_REGEX, REPLACEMENT)
                     .toLowerCase();
             String normalizedName = Normalizer.normalize(state.name, Normalizer.Form.NFD)
-                    .replaceAll("[^\\p{ASCII}]", "")
+                    .replaceAll(NON_ASCII_REGEX, REPLACEMENT)
                     .toLowerCase();
             if (normalizedCode.equals(normalizedInput) || normalizedName.equals(normalizedInput)) {
                 return state;

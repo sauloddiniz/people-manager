@@ -106,7 +106,7 @@ public class Person {
 
     public List<Address> changePrincipalAddress(Address address) {
         List<Address> principalAddress = new ArrayList<>();
-        if (!this.addresses.isEmpty() && address.getPrincipal()) {
+        if (!this.addresses.isEmpty() && Boolean.TRUE.equals(address.getPrincipal())) {
             principalAddress = this.addresses
                     .stream()
                     .filter(Address::getPrincipal).toList();
@@ -124,7 +124,7 @@ public class Person {
 
     public Address getPrincipalAddress() {
        for (Address address : this.addresses) {
-           if (address.getPrincipal()) {
+           if (Boolean.TRUE.equals(address.getPrincipal())) {
                return address;
            }
        }

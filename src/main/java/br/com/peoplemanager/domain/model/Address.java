@@ -10,7 +10,7 @@ public class Address {
     private String number;
     private String city;
     private StateEnum state;
-    private Boolean principal;
+    private boolean principal;
     private Person person;
 
     public Address(String street, String zipCode, String number, String city, StateEnum state, Boolean principal, Person person) {

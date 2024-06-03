@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public class PersonEntityMapper {
 
+    private PersonEntityMapper(){}
     public static PersonEntity toEntity(Person person) {
         return PersonEntity.builder()
                 .personId(person.getPersonId())
