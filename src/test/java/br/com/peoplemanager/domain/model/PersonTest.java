@@ -1,6 +1,5 @@
 package br.com.peoplemanager.domain.model;
 
-
 import br.com.peoplemanager.domain.enums.StateEnum;
 import br.com.peoplemanager.domain.exception.PersonRequestBirthDateException;
 import br.com.peoplemanager.domain.exception.PersonRequestFullNameException;
@@ -13,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class PersonTest {
+
     @Test
     void shouldThrowErrorWhenNameNotContainsTwoWords() {
         assertThrows(PersonRequestFullNameException.class, () -> {
@@ -87,18 +87,16 @@ class PersonTest {
 
         Person person = getPerson();
 
-        Address newMainAddress =  new Address(3L, "Rua 3", "35170-009",
+        Address newAddress =  new Address(3L, "Rua 3", "35170-009",
                 "264", "Fabriciano", StateEnum.MG, false);
 
-        person.changePrincipalAddress(newMainAddress);
+        person.changePrincipalAddress(newAddress);
 
         long totalPrincipalAddress =
                 person.getAddresses().stream().filter(Address::getPrincipal).count();
 
         assertEquals(expectedTotalAddressPrincipal, totalPrincipalAddress);
     }
-
-
 
     private static Person getPerson() {
         List<Address> addressList = List.of(

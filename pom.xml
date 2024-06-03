@@ -16,8 +16,8 @@
     <description>people-manager</description>
     <properties>
         <java.version>17</java.version>
-<!--        <sonar.login>admin</sonar.login>-->
-<!--        <sonar.password>root</sonar.password>-->
+        <sonar.login>admin</sonar.login>
+        <sonar.password>root</sonar.password>
         <sonar.coverage.exclusions>
             **/config/**,
             **/dto/**,
