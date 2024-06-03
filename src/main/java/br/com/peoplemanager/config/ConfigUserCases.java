@@ -1,18 +1,17 @@
-package br.com.peoplemanager.infrastructure.config;
+package br.com.peoplemanager.config;
 
-import br.com.peoplemanager.application.gateway.AddressPersistence;
-import br.com.peoplemanager.application.gateway.PersonPersistence;
-import br.com.peoplemanager.application.usecase.address.ListAddressByIdPerson;
-import br.com.peoplemanager.application.usecase.address.SaveAddress;
-import br.com.peoplemanager.application.usecase.person.FilterPersons;
-import br.com.peoplemanager.application.usecase.person.GetPerson;
-import br.com.peoplemanager.application.usecase.person.ListPersons;
-import br.com.peoplemanager.application.usecase.person.SavePerson;
+import br.com.peoplemanager.domain.gateway.AddressPersistence;
+import br.com.peoplemanager.domain.gateway.PersonPersistence;
+import br.com.peoplemanager.domain.usecase.address.GetAddress;
+import br.com.peoplemanager.domain.usecase.address.ListAddressByIdPerson;
+import br.com.peoplemanager.domain.usecase.address.SaveAddress;
+import br.com.peoplemanager.domain.usecase.address.UpdateAddress;
+import br.com.peoplemanager.domain.usecase.person.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ConfigurationStarterUserCases {
+public class ConfigUserCases {
     @Bean
     public SavePerson savePersonUseCase(PersonPersistence repositoryGateway) {
         return new SavePerson(repositoryGateway);
@@ -21,6 +20,11 @@ public class ConfigurationStarterUserCases {
     @Bean
     public ListPersons listPersonUseCase(PersonPersistence repositoryGateway) {
         return new ListPersons(repositoryGateway);
+    }
+
+    @Bean
+    public UpdatePerson updatePerson(GetPerson getPerson, SavePerson savePerson) {
+        return new UpdatePerson(getPerson, savePerson);
     }
 
     @Bean
@@ -41,5 +45,13 @@ public class ConfigurationStarterUserCases {
     @Bean
     public ListAddressByIdPerson listAddressUseCase(AddressPersistence persistence) {
         return new ListAddressByIdPerson(persistence);
+    }
+    @Bean
+    public UpdateAddress updateAddress(GetAddress getAddress, SaveAddress saveAddress) {
+        return new UpdateAddress(getAddress, saveAddress);
+    }
+    @Bean
+    public GetAddress getAddress(AddressPersistence persistence) {
+        return new GetAddress(persistence);
     }
 }

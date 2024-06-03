@@ -1,9 +1,11 @@
 package br.com.peoplemanager.infrastructure.controller;
 
-import br.com.peoplemanager.application.usecase.address.ListAddressByIdPerson;
-import br.com.peoplemanager.application.usecase.address.SaveAddress;
+import br.com.peoplemanager.domain.usecase.address.GetAddress;
+import br.com.peoplemanager.domain.usecase.address.ListAddressByIdPerson;
+import br.com.peoplemanager.domain.usecase.address.SaveAddress;
 import br.com.peoplemanager.domain.entity.dto.AddressDto;
 import br.com.peoplemanager.domain.entity.valueobject.Address;
+import br.com.peoplemanager.domain.usecase.address.UpdateAddress;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +21,15 @@ public class AddressController {
 
     private final SaveAddress saveAddress;
     private final ListAddressByIdPerson listAddress;
+    private final UpdateAddress updateAddress;
+    private final GetAddress getAddress;
 
-    public AddressController(SaveAddress saveAddress, ListAddressByIdPerson listAddress) {
+    public AddressController(SaveAddress saveAddress, ListAddressByIdPerson listAddress,
+                             UpdateAddress updateAddress, GetAddress getAddress) {
         this.saveAddress = saveAddress;
         this.listAddress = listAddress;
+        this.updateAddress = updateAddress;
+        this.getAddress = getAddress;
     }
 
     @PostMapping()
@@ -38,15 +45,22 @@ public class AddressController {
                 .build();
     }
 
-//    @PutMapping("/{addressId}")
-//    public ResponseEntity<Void> updateAddress(
-//            @PathVariable("personId") Long personId,
-//            @PathVariable Long addressId,
-//            @RequestBody @Valid AddressDto addressRequest, BindingResult bindingResult) {
-//        ValidRequest.valid(bindingResult);
-//        addressService.updateAddress(addressRequest, personId, addressId);
-//        return ResponseEntity.ok().build();
-//    }
+    @PutMapping("/{addressId}")
+    public ResponseEntity<Void> updateAddress(
+            @PathVariable("personId") Long personId,
+            @PathVariable Long addressId,
+            @RequestBody AddressDto addressRequest) {
+        updateAddress.execute(personId, addressId, addressRequest.toModel());
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{addressId}")
+    public ResponseEntity<Void> getAddress(
+            @PathVariable("personId") Long personId,
+            @PathVariable Long addressId) {
+        getAddress.execute(personId, addressId);
+        return ResponseEntity.ok().build();
+    }
 
 //    @PatchMapping("/{addressId}/principal")
 //    public ResponseEntity<Void> updatePrincipalAddress(

@@ -42,6 +42,22 @@ public class Address {
         this.principal = principal;
     }
 
+    public Address(Long addressId, String street, String zipCode, String number, String city, StateEnum state,
+                   Boolean principal, Person person) {
+        validStreet(street);
+        validZipCode(zipCode);
+        validNumber(number);
+        validCity(city);
+        this.addressId = addressId;
+        this.street = street;
+        this.zipCode = zipCode;
+        this.number = number;
+        this.city = city;
+        this.state = state;
+        this.principal = principal;
+        this.person = person;
+    }
+
     private void validCity(String city) {
         if (city == null || city.isBlank()) {
             throw new AddressInvalidException("City not empty");

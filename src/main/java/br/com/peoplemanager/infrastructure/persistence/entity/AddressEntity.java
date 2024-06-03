@@ -46,6 +46,6 @@ public class AddressEntity {
 
     public Address toModel() {
         return new Address(this.addressId, this.street, this.zipCode,
-                this.number, this.city, this.state, this.principal);
+                this.number, this.city, this.state, this.principal, this.person.toModelNoAddress());
     }
 }

@@ -27,6 +27,8 @@ public class Person {
     }
 
     public Person(Long personId, String fullName, LocalDate birthDate, List<Address> addresses) {
+        validFullName(fullName);
+        validBirthDate(birthDate);
         this.addresses = addresses;
         this.personId = personId;
         this.fullName = fullName;
@@ -34,6 +36,8 @@ public class Person {
     }
 
     public Person(Long personId, String fullName, LocalDate birthDate) {
+        validFullName(fullName);
+        validBirthDate(birthDate);
         this.personId = personId;
         this.fullName = fullName;
         this.birthDate = birthDate;

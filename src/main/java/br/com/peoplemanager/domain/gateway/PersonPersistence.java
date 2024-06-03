@@ -1,4 +1,4 @@
-package br.com.peoplemanager.application.gateway;
+package br.com.peoplemanager.domain.gateway;
 
 import br.com.peoplemanager.domain.entity.Person;
 import br.com.peoplemanager.domain.entity.dto.PersonDto;

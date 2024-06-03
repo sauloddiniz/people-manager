@@ -43,4 +43,8 @@ public class PersonEntity {
                         .toList());
 
     }
+
+    public Person toModelNoAddress() {
+        return new Person(this.personId, this.fullName, this.birthDate);
+    }
 }

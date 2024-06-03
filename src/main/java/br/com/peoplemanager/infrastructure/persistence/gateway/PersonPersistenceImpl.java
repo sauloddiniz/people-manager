@@ -1,6 +1,6 @@
 package br.com.peoplemanager.infrastructure.persistence.gateway;
 
-import br.com.peoplemanager.application.gateway.PersonPersistence;
+import br.com.peoplemanager.domain.gateway.PersonPersistence;
 import br.com.peoplemanager.domain.entity.Person;
 import br.com.peoplemanager.infrastructure.persistence.entity.PersonEntity;
 import br.com.peoplemanager.infrastructure.persistence.repository.PersonRepository;

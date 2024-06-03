@@ -1,7 +1,7 @@
-package br.com.peoplemanager.application.usecase.address;
+package br.com.peoplemanager.domain.usecase.address;
 
-import br.com.peoplemanager.application.gateway.AddressPersistence;
-import br.com.peoplemanager.application.usecase.person.GetPerson;
+import br.com.peoplemanager.domain.gateway.AddressPersistence;
+import br.com.peoplemanager.domain.usecase.person.GetPerson;
 import br.com.peoplemanager.domain.entity.Person;
 import br.com.peoplemanager.domain.entity.valueobject.Address;
 
