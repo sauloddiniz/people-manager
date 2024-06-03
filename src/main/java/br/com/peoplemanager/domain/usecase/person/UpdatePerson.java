@@ -1,6 +1,6 @@
 package br.com.peoplemanager.domain.usecase.person;
 
-import br.com.peoplemanager.domain.entity.Person;
+import br.com.peoplemanager.domain.model.Person;
 
 public class UpdatePerson {
     private final GetPerson getPerson;

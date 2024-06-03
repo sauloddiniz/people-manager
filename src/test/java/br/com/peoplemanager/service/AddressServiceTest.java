@@ -1,6 +1,6 @@
 package br.com.peoplemanager.service;
 
-import br.com.peoplemanager.domain.entity.dto.AddressDto;
+import br.com.peoplemanager.dto.AddressDto;
 import br.com.peoplemanager.infrastructure.persistence.entity.AddressEntity;
 import br.com.peoplemanager.infrastructure.persistence.entity.PersonEntity;
 import br.com.peoplemanager.naousar.enuns.StateEnum;

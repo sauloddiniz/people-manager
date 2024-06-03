@@ -1,6 +1,6 @@
 package br.com.peoplemanager.domain.gateway;
 
-import br.com.peoplemanager.domain.entity.valueobject.Address;
+import br.com.peoplemanager.domain.model.Address;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package br.com.peoplemanager.domain.entity;
+package br.com.peoplemanager.domain.model;
 
 
 import br.com.peoplemanager.domain.exception.PersonRequestBirthDateException;

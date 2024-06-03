@@ -1,6 +1,5 @@
-package br.com.peoplemanager.domain.entity.valueobject;
+package br.com.peoplemanager.domain.model;
 
-import br.com.peoplemanager.domain.entity.Person;
 import br.com.peoplemanager.domain.enums.StateEnum;
 import br.com.peoplemanager.domain.exception.AddressInvalidException;
 

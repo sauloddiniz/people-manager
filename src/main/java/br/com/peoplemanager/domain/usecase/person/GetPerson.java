@@ -1,7 +1,7 @@
 package br.com.peoplemanager.domain.usecase.person;
 
 import br.com.peoplemanager.domain.gateway.PersonPersistence;
-import br.com.peoplemanager.domain.entity.Person;
+import br.com.peoplemanager.domain.model.Person;
 import br.com.peoplemanager.domain.exception.PersonNotFoundException;
 
 public class GetPerson {

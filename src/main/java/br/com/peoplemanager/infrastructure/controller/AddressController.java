@@ -3,9 +3,10 @@ package br.com.peoplemanager.infrastructure.controller;
 import br.com.peoplemanager.domain.usecase.address.GetAddress;
 import br.com.peoplemanager.domain.usecase.address.ListAddressByIdPerson;
 import br.com.peoplemanager.domain.usecase.address.SaveAddress;
-import br.com.peoplemanager.domain.entity.dto.AddressDto;
-import br.com.peoplemanager.domain.entity.valueobject.Address;
+import br.com.peoplemanager.dto.AddressDto;
+import br.com.peoplemanager.domain.model.Address;
 import br.com.peoplemanager.domain.usecase.address.UpdateAddress;
+import br.com.peoplemanager.dto.mapper.AddressDtoMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,10 @@ public class AddressController {
     public ResponseEntity<Void> personsAddresses(
             @PathVariable("personId") Long personId,
             @RequestBody AddressDto addressRequest) {
-        Long idAddressSaved = saveAddress.execute(personId, addressRequest.toModel()).getAddressId();
+
+        Long idAddressSaved = saveAddress.execute(personId,
+                AddressDtoMapper.toModel(addressRequest)).getAddressId();
+
         return ResponseEntity
                 .created(ServletUriComponentsBuilder
                         .fromCurrentRequest().path("/".concat(String.valueOf(idAddressSaved)))
@@ -48,7 +52,10 @@ public class AddressController {
             @PathVariable("personId") Long personId,
             @PathVariable Long addressId,
             @RequestBody AddressDto addressRequest) {
-        updateAddress.execute(personId, addressId, addressRequest.toModel());
+
+        updateAddress.execute(personId, addressId,
+                AddressDtoMapper.toModel(addressRequest));
+
         return ResponseEntity.ok().build();
     }
 
@@ -57,7 +64,7 @@ public class AddressController {
             @PathVariable("personId") Long personId,
             @PathVariable Long addressId) {
         Address address = getAddress.execute(personId, addressId);
-        return ResponseEntity.ok().body(AddressDto.fromModel(address));
+        return ResponseEntity.ok().body(AddressDtoMapper.toDto(address));
     }
 
 //    @PatchMapping("/{addressId}/principal")
@@ -77,6 +84,6 @@ public class AddressController {
 
     @NotNull
     private static List<AddressDto> converter(List<Address> addresses) {
-        return addresses.stream().map(AddressDto::fromModel).toList();
+        return addresses.stream().map(AddressDtoMapper::toDto).toList();
     }
 }

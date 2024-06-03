@@ -1,7 +1,6 @@
 package br.com.peoplemanager.domain.gateway;
 
-import br.com.peoplemanager.domain.entity.Person;
-import br.com.peoplemanager.domain.entity.dto.PersonDto;
+import br.com.peoplemanager.domain.model.Person;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,5 +1,5 @@
 package br.com.peoplemanager.domain.usecase.address;
-import br.com.peoplemanager.domain.entity.valueobject.Address;
+import br.com.peoplemanager.domain.model.Address;
 
 public class UpdateAddress {
     private final GetAddress getAddress;

@@ -1,6 +1,5 @@
-package br.com.peoplemanager.domain.entity;
+package br.com.peoplemanager.domain.model;
 
-import br.com.peoplemanager.domain.entity.valueobject.Address;
 import br.com.peoplemanager.domain.exception.PersonRequestBirthDateException;
 import br.com.peoplemanager.domain.exception.PersonRequestFullNameException;
 
@@ -8,7 +7,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Person {
     private Long personId;
