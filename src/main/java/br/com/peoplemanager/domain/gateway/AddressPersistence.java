@@ -9,4 +9,5 @@ public interface AddressPersistence {
     Address save(Address address);
     Optional<Address> findById(Long addressId);
     List<Address> findAllByIdPerson(Long personId);
+
 }

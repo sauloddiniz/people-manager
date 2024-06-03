@@ -9,13 +9,13 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ConfigUserCases {
-    @Bean
-    public SavePerson savePersonUseCase(PersonPersistence repositoryGateway) {
-        return new SavePerson(repositoryGateway);
-    }
 
     @Bean
-    public ListPersons listPersonUseCase(PersonPersistence repositoryGateway) {
+    public SavePerson savePerson(PersonPersistence repositoryGateway) {
+        return new SavePerson(repositoryGateway);
+    }
+    @Bean
+    public ListPersons listPersons(PersonPersistence repositoryGateway) {
         return new ListPersons(repositoryGateway);
     }
 
@@ -25,22 +25,22 @@ public class ConfigUserCases {
     }
 
     @Bean
-    public FilterPersons filterPersonsUseCase(PersonPersistence repositoryGateway) {
+    public FilterPersons filterPersons(PersonPersistence repositoryGateway) {
         return new FilterPersons(repositoryGateway);
     }
 
     @Bean
-    public GetPerson getPersonsUseCase(PersonPersistence repositoryGateway) {
+    public GetPerson getPerson(PersonPersistence repositoryGateway) {
         return new GetPerson(repositoryGateway);
     }
 
     @Bean
-    public SaveAddress saveAddressUseCase(AddressPersistence repositoryGateway, GetPerson getPerson) {
+    public SaveAddress saveAddress(AddressPersistence repositoryGateway, GetPerson getPerson) {
         return new SaveAddress(repositoryGateway, getPerson);
     }
 
     @Bean
-    public ListAddressByIdPerson listAddressUseCase(AddressPersistence persistence) {
+    public ListAddressByIdPerson listAddressByIdPerson(AddressPersistence persistence) {
         return new ListAddressByIdPerson(persistence);
     }
 

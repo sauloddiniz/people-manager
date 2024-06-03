@@ -10,4 +10,5 @@ public interface PersonPersistence {
     List<Person> getAllPersons();
     List<Person> filterPerson(List<String> names);
     Optional<Person> findById(Long personId);
+
 }

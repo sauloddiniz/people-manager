@@ -50,24 +50,12 @@ public class Person {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
     public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public List<Address> getAddresses() {
         return addresses;
-    }
-
-    public void setAddresses(Address addresses) {
-        this.addresses.add(addresses);
     }
 
     @Override

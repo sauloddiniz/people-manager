@@ -87,7 +87,6 @@ public class AddressController {
         return ResponseEntity.ok().body(converter(addresses));
     }
 
-    @NotNull
     private static List<AddressDto> converter(List<Address> addresses) {
         return addresses.stream().map(AddressDtoMapper::toDto).toList();
     }
