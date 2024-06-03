@@ -4,6 +4,8 @@ import br.com.peoplemanager.domain.exception.StateEnumConverterException;
 import java.text.Normalizer;
 
 public enum StateEnum {
+
+
     AC("AC", "Acre"),
     AL("AL", "Alagoas"),
     AP("AP", "Amapá"),

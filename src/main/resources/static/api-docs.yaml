@@ -51,7 +51,7 @@ paths:
     get:
       tags:
         - person
-      summary: Get person
+      summary: List person contains filter
       description: list all person
       operationId: listPerson
       parameters:
@@ -71,7 +71,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PersonDto'
+                  $ref: '#/components/schemas/PersonResponseDto'
         '500':
           description: Internal server error
   /person/{personId}:
@@ -110,7 +110,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal server error
-  /person/{personId}/addresses:
+    get:
+      tags:
+        - person
+      summary: Get person
+      description: get person
+      operationId: getPerson
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonResponseDto'
+        '500':
+          description: Internal server error
+  /person/{personId}/address:
     post:
       tags:
         - address
@@ -156,8 +171,39 @@ paths:
     get:
       tags:
         - address
-      summary: Get addresses
+      summary: Get addresses by person
       description: Get a addresses
+      operationId: getAddresses
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            type: string
+          description: The ID of the person
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AddressDto'
+        '404':
+          description: Person not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+  /person/{personId}/address/{addressId}:
+    get:
+      tags:
+        - address
+      summary: Get address by id
+      description: Get address
       operationId: getAddress
       parameters:
         - in: path
@@ -180,15 +226,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AddressDto'
-        '400':
-          description: bad request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+                $ref: '#/components/schemas/AddressDto'
         '404':
           description: Person not found
           content:
@@ -197,7 +235,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal server error
-  /person/{personId}/addresses/{addressId}:
     put:
       tags:
         - address
@@ -241,7 +278,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Internal server error
-  /person/{personId}/addresses/{addressId}/principal:
     patch:
       tags:
         - address
@@ -261,6 +297,16 @@ paths:
           schema:
             type: string
           description: The ID of the address
+      requestBody:
+        description: update principal address
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                principal:
+                  type: boolean
+                  example: true
       responses:
         '200':
           description: success
@@ -292,6 +338,69 @@ components:
         birthDate:
           type: string
           format: date
+    PersonResponseDto:
+      type: object
+      properties:
+        personId:
+          type: number
+          example: 1
+        fullName:
+          type: string
+          example: Jose Jr. Alvarez
+        birthDate:
+          type: string
+          format: date
+        principalAddress:
+          type: object
+          properties:
+            id:
+              type: integer
+              example: 1
+            street:
+              type: string
+              example: "rua a"
+            zipCode:
+              type: string
+              example: 00000-000
+            number:
+              type: string
+              example: 123
+            city:
+              type: string
+              example: Coronel Fabriciano
+            state:
+              type: string
+              enum:
+                - AC
+                - AL
+                - AP
+                - AM
+                - BA
+                - CE
+                - DF
+                - ES
+                - GO
+                - MA
+                - MT
+                - MS
+                - MG
+                - PA
+                - PB
+                - PR
+                - PE
+                - PI
+                - RJ
+                - RN
+                - RS
+                - RO
+                - RR
+                - SC
+                - SP
+                - SE
+                - TO
+            principal:
+              type: boolean
+              example: true
     AddressDto:
       type: object
       required:
@@ -311,7 +420,34 @@ components:
           example: Fabri City
         state:
           type: string
-          example: MG
+          enum:
+            - AC
+            - AL
+            - AP
+            - AM
+            - BA
+            - CE
+            - DF
+            - ES
+            - GO
+            - MA
+            - MT
+            - MS
+            - MG
+            - PA
+            - PB
+            - PR
+            - PE
+            - PI
+            - RJ
+            - RN
+            - RS
+            - RO
+            - RR
+            - SC
+            - SP
+            - SE
+            - TO
         zipCode:
           type: string
           example: '35170-009'
