@@ -15,7 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@RequestMapping("/person/{personId}/addresses")
+@RequestMapping("/person/{personId}/address")
 @CrossOrigin(origins = "*")
 public class AddressController {
     private final SaveAddress saveAddress;

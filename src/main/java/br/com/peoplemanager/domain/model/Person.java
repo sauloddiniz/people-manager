@@ -14,9 +14,6 @@ public class Person {
     private LocalDate birthDate;
     private List<Address> addresses;
 
-    public Person() {
-    }
-
     public Person(String fullName, LocalDate birthDate) {
         validFullName(fullName);
         validBirthDate(birthDate);

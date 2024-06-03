@@ -1,4 +1,4 @@
-package br.com.peoplemanager.controller;
+package br.com.peoplemanager.infrastructure.controller;
 
 import br.com.peoplemanager.infrastructure.persistence.entity.PersonEntity;
 import br.com.peoplemanager.infrastructure.persistence.repository.PersonRepository;

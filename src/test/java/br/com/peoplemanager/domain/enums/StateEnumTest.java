@@ -1,6 +1,6 @@
-package br.com.peoplemanager.enuns;
+package br.com.peoplemanager.domain.enums;
 
-import br.com.peoplemanager.naousar.enuns.StateEnum;
+import br.com.peoplemanager.domain.enums.StateEnum;
 import br.com.peoplemanager.domain.exception.StateEnumConverterException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

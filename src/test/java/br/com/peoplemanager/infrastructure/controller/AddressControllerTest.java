@@ -1,4 +1,4 @@
-package br.com.peoplemanager.controller;
+package br.com.peoplemanager.infrastructure.controller;
 
 import br.com.peoplemanager.infrastructure.persistence.entity.AddressEntity;
 import br.com.peoplemanager.infrastructure.persistence.repository.AddressRepository;
@@ -54,7 +54,7 @@ class AddressControllerTest {
                 """;
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post("/person/1/addresses")
+                        .post("/person/1/address")
                         .content(jsonAddressComplete)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(
@@ -79,7 +79,7 @@ class AddressControllerTest {
                 """;
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .post("/person/1/addresses")
+                        .post("/person/1/address")
                         .content(jsonAddressIncomplete)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(
@@ -106,7 +106,7 @@ class AddressControllerTest {
                 """;
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .put("/person/1/addresses/1")
+                        .put("/person/1/address/1")
                         .content(jsonAddressComplete)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(
@@ -119,7 +119,7 @@ class AddressControllerTest {
     void shouldSuccessWhenUpdatePrinciapAddress() throws Exception {
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .patch("/person/1/addresses/1/principal")
+                        .patch("/person/1/address/1/principal")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(
                         status().isOk())
@@ -127,7 +127,7 @@ class AddressControllerTest {
     }
 
     @Test
-    @DisplayName("should success when get addresses")
+    @DisplayName("should success when get address")
     void shouldSuccessWhenGetAddresses() throws Exception {
 
         String expectedResponse = """
@@ -138,7 +138,7 @@ class AddressControllerTest {
         """;
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .get("/person/1/addresses")
+                        .get("/person/1/address")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(
                         status().isOk())
@@ -156,7 +156,7 @@ class AddressControllerTest {
         """;
 
         this.mockMvc.perform(MockMvcRequestBuilders
-                        .get("/person/1/addresses")
+                        .get("/person/1/address")
                         .param("ids", "1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(
