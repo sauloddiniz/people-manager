@@ -13,12 +13,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/person/{personId}/addresses")
 @CrossOrigin(origins = "*")
 public class AddressController {
-
     private final SaveAddress saveAddress;
     private final ListAddressByIdPerson listAddress;
     private final UpdateAddress updateAddress;
@@ -55,11 +53,11 @@ public class AddressController {
     }
 
     @GetMapping("/{addressId}")
-    public ResponseEntity<Void> getAddress(
+    public ResponseEntity<AddressDto> getAddress(
             @PathVariable("personId") Long personId,
             @PathVariable Long addressId) {
-        getAddress.execute(personId, addressId);
-        return ResponseEntity.ok().build();
+        Address address = getAddress.execute(personId, addressId);
+        return ResponseEntity.ok().body(AddressDto.fromModel(address));
     }
 
 //    @PatchMapping("/{addressId}/principal")

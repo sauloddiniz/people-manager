@@ -13,9 +13,13 @@ public class GetAddress {
     public Address execute(Long personId, Long addressId) {
         Address address = persistence.findById(addressId)
                 .orElseThrow(() -> new AddressNotFoundException("Address not found: " + addressId));
-        if (!address.getPerson().getPersonId().equals(personId)) {
+        if (validAddressPersonIdEqualPersonId(personId, address)) {
             throw new AddressNotFoundException("Address not found: " + addressId);
         }
         return address;
+    }
+
+    private static boolean validAddressPersonIdEqualPersonId(Long personId, Address address) {
+        return address.getPerson() != null && !address.getPerson().getPersonId().equals(personId);
     }
 }
