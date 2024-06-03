@@ -219,7 +219,7 @@ paths:
           schema:
             type: string
           description: The ID of the person
-        - name: ids
+        - name: addressId
           in: path
           description: address id
           required: true
@@ -468,7 +468,7 @@ components:
       properties:
         date:
           type: string
-          example: Mon May 13 10:59:34 UTC 2024
+          example: Mon May 13 10:59:34 UTC 2000
         status:
           type: integer
           example: 400
