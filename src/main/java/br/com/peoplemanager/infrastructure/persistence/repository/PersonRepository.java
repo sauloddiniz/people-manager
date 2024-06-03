@@ -11,7 +11,8 @@ import java.util.List;
 
 
 @Repository
-public interface PersonRepository extends JpaRepository<PersonEntity, Long>, JpaSpecificationExecutor<PersonEntity> {
+public interface PersonRepository extends JpaRepository<PersonEntity, Long>,
+        JpaSpecificationExecutor<PersonEntity> {
 
     static Specification<PersonEntity> containsHasName(List<String> names) {
         return (root, query, cb) -> {

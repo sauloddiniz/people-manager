@@ -26,11 +26,6 @@ public class AddressPersistenceImpl implements AddressPersistence {
     }
 
     @Override
-    public void update(Address address) {
-        repository.save(AddressEntityMapper.toEntity(address));
-    }
-
-    @Override
     public Optional<Address> findById(Long addressId) {
         return repository
                 .findById(addressId)
@@ -45,8 +40,4 @@ public class AddressPersistenceImpl implements AddressPersistence {
                 .toList();
     }
 
-    @Override
-    public List<Address> findAllPrincipalAddresses() {
-        return null;
-    }
 }
