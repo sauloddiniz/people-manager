@@ -116,6 +116,13 @@ paths:
       summary: Get person
       description: get person
       operationId: getPerson
+      parameters:
+        - in: path
+          name: personId
+          required: true
+          schema:
+            type: string
+          description: The ID of the person to be updated
       responses:
         "200":
           description: Successful operation
@@ -213,13 +220,12 @@ paths:
             type: string
           description: The ID of the person
         - name: ids
-          in: query
-          description: List of ids to filter the address
-          required: false
+          in: path
+          description: address id
+          required: true
           schema:
-            type: array
-            items:
-              type: string
+            type: string
+            description: The id of the address
       responses:
         '200':
           description: success
