@@ -58,15 +58,6 @@ public class Person {
         return addresses;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "personId=" + personId +
-                ", fullName='" + fullName + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
-
     private void validBirthDate(LocalDate birthDate) {
         validBirthDateIsNotNull(birthDate);
         validateAgeIsAtLeast18(birthDate);
@@ -88,7 +79,7 @@ public class Person {
 
     private void validFullName(String fullName) {
         if (fullName == null || fullName.isBlank() || !fullName.matches("^\\w+\\s+\\w+.*$")) {
-            throw new PersonRequestFullNameException(fullName);
+            throw new PersonRequestFullNameException("Name cannot be empty and must contain at least two words.");
         }
     }
 

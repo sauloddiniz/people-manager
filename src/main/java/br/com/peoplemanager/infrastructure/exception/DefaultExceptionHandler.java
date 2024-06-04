@@ -1,9 +1,6 @@
 package br.com.peoplemanager.infrastructure.exception;
 
-import br.com.peoplemanager.domain.exception.AddressNotFoundException;
-import br.com.peoplemanager.domain.exception.PersonErrorException;
-import br.com.peoplemanager.domain.exception.PersonNotFoundException;
-import br.com.peoplemanager.domain.exception.StateEnumConverterException;
+import br.com.peoplemanager.domain.exception.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +13,18 @@ public class DefaultExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PersonErrorException.class)
     public ResponseEntity<ErrorResponse> personError(PersonErrorException exception, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponse
+                        .builder()
+                        .message(exception.getMessage())
+                        .httpStatus(HttpStatus.BAD_REQUEST.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
+
+    @ExceptionHandler(PersonRequestFullNameException.class)
+    public ResponseEntity<ErrorResponse> personRequestFullNameException(PersonRequestFullNameException exception, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorResponse
                         .builder()
