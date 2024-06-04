@@ -14,10 +14,6 @@ public class ConfigUserCases {
     public SavePerson savePerson(PersonPersistence repositoryGateway) {
         return new SavePerson(repositoryGateway);
     }
-    @Bean
-    public ListPersons listPersons(PersonPersistence repositoryGateway) {
-        return new ListPersons(repositoryGateway);
-    }
 
     @Bean
     public UpdatePerson updatePerson(GetPerson getPerson, SavePerson savePerson) {

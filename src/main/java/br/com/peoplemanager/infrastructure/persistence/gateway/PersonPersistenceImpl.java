@@ -28,15 +28,6 @@ public class PersonPersistenceImpl implements PersonPersistence {
     }
 
     @Override
-    public List<Person> getAllPersons() {
-        return repository
-                .findAll()
-                .stream()
-                .map(PersonEntityMapper::toModel)
-                .toList();
-    }
-
-    @Override
     public List<Person> filterPerson(List<String> names) {
         return repository
                 .findAll(where(PersonRepository
