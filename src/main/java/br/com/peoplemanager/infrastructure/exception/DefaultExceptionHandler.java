@@ -58,6 +58,17 @@ public class DefaultExceptionHandler extends ResponseEntityExceptionHandler {
                         .method(request.getMethod())
                         .build());
     }
+    @ExceptionHandler(AddressInvalidException.class)
+    public ResponseEntity<ErrorResponse> addressInvalidException(AddressInvalidException exception, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(ErrorResponse
+                        .builder()
+                        .message(exception.getMessage())
+                        .httpStatus(HttpStatus.BAD_REQUEST.value())
+                        .path(request.getServletPath())
+                        .method(request.getMethod())
+                        .build());
+    }
 
     @ExceptionHandler(StateEnumConverterException.class)
     public ResponseEntity<ErrorResponse> stateEnumConverterException(StateEnumConverterException exception, HttpServletRequest request) {

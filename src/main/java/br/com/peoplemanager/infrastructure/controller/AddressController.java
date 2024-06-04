@@ -4,7 +4,6 @@ import br.com.peoplemanager.domain.usecase.address.*;
 import br.com.peoplemanager.dto.AddressDto;
 import br.com.peoplemanager.domain.model.Address;
 import br.com.peoplemanager.dto.mapper.AddressDtoMapper;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

@@ -75,7 +75,7 @@ public class Address {
     }
     private void validStreet(String street) {
         if (street == null || street.isBlank()) {
-            throw new AddressInvalidException("Street not empty");
+            throw new AddressInvalidException("street: must not be empty");
         }
     }
 
